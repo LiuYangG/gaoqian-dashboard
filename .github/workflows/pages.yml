@@ -1,0 +1,69 @@
+name: Deploy dashboard
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # GitHub Actions uses UTC. 16:00 UTC = 00:00 Asia/Shanghai (next day).
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Restore new-homework baseline
+        uses: actions/cache@v4
+        with:
+          path: data/known-homeworks.json
+          key: known-homeworks-${{ github.run_id }}
+          restore-keys: |
+            known-homeworks-
+
+      - name: Scrape latest data
+        env:
+          MARS_USER: ${{ secrets.MARS_USER }}
+          MARS_PASS: ${{ secrets.MARS_PASS }}
+        run: node run-scrape.mjs
+
+      - name: Build static site
+        run: node scripts/build-static.mjs
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

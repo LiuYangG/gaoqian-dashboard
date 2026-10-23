@@ -1,0 +1,12 @@
+{
+  "name": "gaoqian-homework-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MarsOJ 高潜作业完成情况与做题记录可视化看板",
+  "scripts": {
+    "start": "node server.mjs",
+    "scrape": "node run-scrape.mjs",
+    "build:static": "node scripts/build-static.mjs"
+  }
+}

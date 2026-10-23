@@ -1,0 +1,15 @@
+# Local credentials
+.env
+
+# Local scraped data (student names, scores, code) must not be committed
+data/
+preview/
+
+# Build output
+dist/
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

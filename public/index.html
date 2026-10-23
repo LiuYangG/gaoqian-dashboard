@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MarsOJ 高潜作业完成情况与做题记录可视化看板" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>高潜作业 · 学情看板</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div>
+        <h1>高潜作业 · 学情看板</h1>
+        <p>MarsOJ 作业完成情况 · 做题记录 · 逐题分析</p>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <div class="sync-note">
+        <strong><span id="statusDot" class="status-dot"></span><span id="syncText">正在连接…</span></strong>
+        <span id="syncSub">数据来自 manager.marsoj.cn</span>
+      </div>
+      <button id="refreshBtn" class="btn btn-primary" data-action="refresh">
+        <span id="refreshIcon">↻</span> 抓取最新数据
+      </button>
+    </div>
+  </header>
+
+  <div class="app-shell">
+    <div id="newBanner" class="banner hidden">
+      <div class="banner-icon">✦</div>
+      <div class="banner-text" id="newBannerText"></div>
+      <button class="btn btn-primary btn-sm" data-action="refresh">立即抓取</button>
+      <button class="btn btn-soft btn-sm" data-action="dismiss-banner">稍后</button>
+    </div>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-tab="overview">总览</button>
+      <button class="tab" data-tab="homework">作业分析 <span class="count" id="tabHwCount">0</span></button>
+      <button class="tab" data-tab="students">学员画像 <span class="count" id="tabStudentCount">0</span></button>
+      <button class="tab" data-tab="records">提交记录 <span class="count" id="tabRecordCount">0</span></button>
+    </nav>
+
+    <section class="filterbar" id="filterbar">
+      <div class="filter-group">
+        <div class="filter-label">作业范围</div>
+        <div class="pills" id="homeworkPills"></div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">搜索学员</div>
+        <div class="searchbox">
+          <span class="search-icon">⌕</span>
+          <input id="studentSearch" type="text" placeholder="输入姓名或 UID…" autocomplete="off" />
+        </div>
+      </div>
+    </section>
+
+    <main id="content"></main>
+
+    <div id="emptyState" class="empty hidden">
+      <div class="empty-icon">◔</div>
+      <h3>还没有抓取数据</h3>
+      <p>点击右上角“抓取最新数据”，系统会自动检索所有“高潜”作业，并抓取每位学员的逐题完成情况与做题记录。</p>
+      <button class="btn btn-primary" data-action="refresh">开始抓取</button>
+    </div>
+
+    <footer class="footer">
+      <span>数据源：MarsOJ 管理后台 / 学员端 · 仅用于教学分析</span>
+      <span id="footerMeta">尚未抓取</span>
+      <span id="autoCheckLabel">每 5 分钟自动检测新增作业 · <span id="lastCheck">—</span></span>
+    </footer>
+  </div>
+
+  <div id="drawerOverlay" class="overlay" data-action="close-drawer"></div>
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <div>
+        <h3 id="drawerTitle">做题记录</h3>
+        <p id="drawerSub"></p>
+      </div>
+      <button class="drawer-close" data-action="close-drawer">✕</button>
+    </div>
+    <div class="drawer-body" id="drawerBody"></div>
+  </aside>
+
+  <div id="progressOverlay" class="progress-overlay hidden">
+    <div class="progress-card">
+      <h3><span id="progressSpinner" class="spinner"></span><span id="progressTitle">正在抓取最新数据…</span></h3>
+      <p id="progressMsg">正在登录 MarsOJ…</p>
+      <div class="progress-track"><span id="progressBar" style="width:0%"></span></div>
+      <div class="progress-meta"><span id="progressCount"></span><span id="progressPct">0%</span></div>
+      <div class="progress-log" id="progressLog">抓取期间请保持页面打开，完成后会自动刷新看板。</div>
+      <div style="margin-top:14px;text-align:right"><button id="progressClose" class="btn btn-soft btn-sm hidden" data-action="close-progress">关闭</button></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./vendor/echarts.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
