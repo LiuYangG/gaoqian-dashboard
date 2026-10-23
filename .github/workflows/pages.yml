@@ -30,6 +30,9 @@ jobs:
         with:
           node-version: 24
 
+      - name: Prepare data directory
+        run: mkdir -p data && test -f data/known-homeworks.json || echo '{}' > data/known-homeworks.json
+
       - name: Restore new-homework baseline
         uses: actions/cache@v4
         with:
