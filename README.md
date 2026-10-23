@@ -89,7 +89,7 @@ node server.mjs
    https://<你的用户名>.github.io/<仓库名>/
    ```
 
-之后每天北京时间 00:00 自动更新；也可以随时到 Actions 页面手动运行。工作流文件为 `.github/workflows/pages.yml`。
+之后每天北京时间 00:00 自动更新；也可以随时到 Actions 页面手动运行。工作流文件为 `.github/workflows/pages.yml`。更细的逐步清单见 [GITHUB_DEPLOY.md](GITHUB_DEPLOY.md)。
 
 > 公开页面会展示真实学员姓名、成绩和提交代码（当前配置），并已添加 `noindex` / `robots.txt` 禁止搜索引擎收录。请只在可信范围内分享链接。
 
@@ -99,6 +99,8 @@ node server.mjs
 server.mjs              本地服务：静态页面、抓取 API、SSE 进度、定时检测
 scraper.mjs             登录、检索作业、成绩表解析、记录抓取与解析
 run-scrape.mjs          命令行抓取入口
+scripts/build-static.mjs 生成 GitHub Pages 静态发布目录 dist/
+.github/workflows/pages.yml 每天 00:00（北京时间）抓取并部署 Pages
 public/index.html       页面结构
 public/styles.css       视觉样式
 public/app.js           交互、图表、筛选、详情抽屉
