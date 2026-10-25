@@ -20,7 +20,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,21 +45,22 @@ jobs:
         uses: actions/cache@v4
         with:
           path: data/raw
-          key: raw-submissions-${{ github.run_id }}
+          key: raw-lessons-${{ github.run_id }}
           restore-keys: |
-            raw-submissions-
+            raw-lessons-
 
       - name: Scrape latest data
         env:
           MARS_USER: ${{ secrets.MARS_USER }}
           MARS_PASS: ${{ secrets.MARS_PASS }}
+          FORCE_SCRAPE: '1'
         run: node run-scrape.mjs
 
       - name: Fetch full submission stream
         env:
           MARS_USER: ${{ secrets.MARS_USER }}
           MARS_PASS: ${{ secrets.MARS_PASS }}
-          RAW_BUDGET_MS: 600000
+          RAW_BUDGET_MS: 1500000
         run: node scripts/scrape-raw.mjs
 
       - name: Build diagnosis

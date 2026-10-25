@@ -12,32 +12,13 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import { loadRoles, loadSessionConfig, inferSessionDate, readJson } from '../lib/plan.mjs';
 
 const DEFAULT_COURSE = 'C:/Users/DELL/Desktop/高潜授课';
 const OUT_DIR = path.resolve('blueprint');
 
-const LESSONS = [
-  { id: 'L01', lesson: 1, date: '2026-09-12', dir: 'R1-P01-L01-程序设计、竞赛与在线评测入门', homework: '山东高潜01' },
-  { id: 'L02', lesson: 2, date: '2026-09-19', dir: 'R1-P01-L02-变量、类型、输入与运算', homework: '山东高潜02' },
-  { id: 'L03', lesson: 3, date: '2026-09-26', dir: 'R1-P01-L03-比较、逻辑与分支结构', homework: '山东高潜03' },
-  { id: 'L04', lesson: 4, date: '2026-10-17', dir: 'R1-P01-L04-while、for与循环状态', homework: '山东高潜04' },
-  { id: 'L05', lesson: 5, date: '2026-10-24', dir: 'R1-P01-L05-循环嵌套、枚举与数字拆位', homework: '山东高潜05' },
-];
-
-const COHORT = [
-  { uid: 11095, name: '辛嘉泽' },
-  { uid: 11097, name: '王柯铭' },
-  { uid: 11098, name: '宋梓赫' },
-  { uid: 11103, name: '李盈克' },
-];
-const EXCLUDED = [
-  { uid: 11104, name: '王丹丹', reason: 'teacher' },
-  { uid: 11099, name: '刘宸玺', reason: 'new-student' },
-];
-
 const courseArg = process.argv.indexOf('--course');
 const COURSE = courseArg > 0 ? process.argv[courseArg + 1] : DEFAULT_COURSE;
-const PHASE = path.join(COURSE, '第一阶段');
 
 const sha256 = (text) => crypto.createHash('sha256').update(text).digest('hex');
 const read = (file) => fs.readFile(file, 'utf8');
@@ -47,8 +28,34 @@ async function exists(file) {
   try { await fs.access(file); return true; } catch { return false; }
 }
 
-function parseMarkdownTable(headerLine, rowLines) {
-  const header = headerLine.split('|').slice(1, -1).map((c) => strip(c));
+/**
+ * Discover every lesson folder in the course workspace, including phases and
+ * lessons added after the first term. Current layout: 第一阶段/R1-P01-L03-...
+ */
+async function discoverLessonDirs() {
+  const found = [];
+  async function walk(dir, depth) {
+    if (depth > 3) return;
+    let entries;
+    try { entries = await fs.readdir(dir, { withFileTypes: true }); } catch { return; }
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      if (entry.name.startsWith('_') || entry.name === 'tmp' || entry.name === 'output' || entry.name === '__pycache__' || entry.name === 'node_modules') continue;
+      const full = path.join(dir, entry.name);
+      const match = entry.name.match(/^R1-P0(\d+)-L(\d+)-/);
+      if (match) {
+        found.push({ dir: full, phase: Number(match[1]), lesson: Number(match[2]), name: entry.name });
+        continue;
+      }
+      await walk(full, depth + 1);
+    }
+  }
+  await walk(COURSE, 0);
+  found.sort((a, b) => a.phase - b.phase || a.lesson - b.lesson);
+  return found;
+}
+
+function parseMarkdownTable(headerLine, rowLines) {  const header = headerLine.split('|').slice(1, -1).map((c) => strip(c));
   return rowLines.map((line) => {
     const cells = line.split('|').slice(1, -1).map((c) => strip(c));
     const row = {};
@@ -69,7 +76,7 @@ function findTable(md, headingMatch, stopAt = /^#{2,4}\s/m) {
   let headerIdx = -1;
   for (let i = start + 1; i < lines.length; i++) {
     if (stopAt.test(lines[i])) break;
-    if (/^\|/.test(lines[i]) && /题目ID|题目 ID|题号/.test(lines[i])) { headerLine = lines[i]; headerIdx = i; break; }
+    if (/^\|/.test(lines[i]) && /题目\s*ID|题号|\|\s*ID\s*\|/.test(lines[i])) { headerLine = lines[i]; headerIdx = i; break; }
   }
   if (!headerLine) return null;
   const rows = [];
@@ -163,8 +170,13 @@ function parseAcceptance(lessonId) {
   };
 }
 
-function parseModules(md) {
-  const lines = md.split(/\r?\n/);
+function guessHomework(lesson, snapshot) {
+  const re = new RegExp(`高潜\\s*0*${lesson}(?!\\d)`);
+  const hw = (snapshot?.homeworks || []).find((h) => re.test(h.title));
+  return hw ? hw.title : `山东高潜${String(lesson).padStart(2, '0')}`;
+}
+
+function parseModules(md) {  const lines = md.split(/\r?\n/);
   const modules = [];
   let inModule = false;
   let cursor = 0;
@@ -227,24 +239,35 @@ async function main() {
   const sourceFiles = [];
   const sessions = [];
   const problemIndex = new Map();
+  const snapshot = await readJson(path.resolve('data/snapshot.json'), null);
+  const roles = await loadRoles();
+  const sessionConfig = await loadSessionConfig();
+  const lessonDirs = await discoverLessonDirs();
+  if (!lessonDirs.length) throw new Error(`未在 ${COURSE} 找到 R1-P0x-Lxx 课节目录`);
+  console.log(`发现 ${lessonDirs.length} 个课节目录`);
 
-  for (const lesson of LESSONS) {
-    const dir = path.join(PHASE, lesson.dir);
+  for (const entry of lessonDirs) {
+    const id = `L${String(entry.lesson).padStart(2, '0')}`;
+    const cfg = sessionConfig[id] || {};
+    const dir = entry.dir;
     const planFile = path.join(dir, '教师版/01-教师教案.md');
-    if (!(await exists(planFile))) throw new Error(`缺少教案：${planFile}`);
+    if (!(await exists(planFile))) {
+      console.warn(`跳过 ${entry.name}：缺少 教师版/01-教师教案.md`);
+      continue;
+    }
     const plan = await read(planFile);
-    sourceFiles.push({ kind: 'lesson-plan', lesson: lesson.id, file: planFile, sha256: sha256(plan) });
+    sourceFiles.push({ kind: 'lesson-plan', lesson: id, file: planFile, sha256: sha256(plan) });
 
     const dual = await loadDualReview(dir);
-    if (dual.file) sourceFiles.push({ kind: 'dual-review', lesson: lesson.id, file: dual.file, sha256: sha256(JSON.stringify(dual.raw)) });
+    if (dual.file) sourceFiles.push({ kind: 'dual-review', lesson: id, file: dual.file, sha256: sha256(JSON.stringify(dual.raw)) });
     const build = await loadBuildReport(dir);
-    if (build) sourceFiles.push({ kind: 'build-report', lesson: lesson.id, file: path.join(dir, 'BUILD-REPORT.json'), sha256: sha256(JSON.stringify(build)) });
+    if (build) sourceFiles.push({ kind: 'build-report', lesson: id, file: path.join(dir, 'BUILD-REPORT.json'), sha256: sha256(JSON.stringify(build)) });
 
     const formalRows = findTable(plan, /正式题前表|固定正式题前表/) || [];
     const backupRows = findTable(plan, /备用题前表|固定备用题前表/) || [];
 
     const parseRows = (rows, role) => rows.map((row, index) => {
-      const pid = row['题目ID'] || row['题目 ID'] || row['题号'] || '';
+      const pid = row['题目ID'] || row['题目 ID'] || row['题号'] || row['ID'] || '';
       if (!pid) return null;
       const dualRec = dual.map.get(pid);
       const { tier, label } = pickTier(row);
@@ -280,15 +303,27 @@ async function main() {
         source: '教案-备用题解答',
       }));
     }
-    const acceptance = parseAcceptance(lesson.id);
+    const acceptance = parseAcceptance(id);
     const modules = parseModules(plan);
+    const homework = cfg.homework || guessHomework(entry.lesson, snapshot);
+    const date = cfg.date || inferSessionDate(homework, snapshot);
+    const title = cfg.title || entry.name.replace(/^R1-P0\d+-L\d+-/, '');
+    const homeworkExists = (snapshot?.homeworks || []).some((h) => h.title === homework);
+    if (!formal.length && !backup.length) {
+      console.warn(`跳过 ${id}：未解析到正式/备用题（教案表格格式可能变化）`);
+      continue;
+    }
+    if (!cfg.date && !homeworkExists) {
+      console.warn(`跳过 ${id}：作业「${homework}」尚未出现在成绩表，也没有在 config/sessions.json 配置日期`);
+      continue;
+    }
 
     const session = {
-      id: lesson.id,
-      lesson: lesson.lesson,
-      title: lesson.dir.replace(/^R1-P01-L\d+-/, ''),
-      date: lesson.date,
-      homework: lesson.homework,
+      id,
+      lesson: entry.lesson,
+      title,
+      date,
+      homework,
       window: { start: '09:00', end: '16:30', lunch: '12:00-13:30' },
       totalMinutes: build?.minutes || 420,
       modules,
@@ -299,10 +334,12 @@ async function main() {
     sessions.push(session);
 
     for (const p of [...formal, ...backup]) {
-      if (!problemIndex.has(p.pid)) problemIndex.set(p.pid, { ...p, lessonId: lesson.id, lesson: lesson.lesson, roles: [p.role] });
+      if (!problemIndex.has(p.pid)) problemIndex.set(p.pid, { ...p, lessonId: id, lesson: entry.lesson, roles: [p.role] });
       else problemIndex.get(p.pid).roles.push(p.role);
     }
   }
+
+  sessions.sort((a, b) => a.lesson - b.lesson);
 
   // Cross-lesson preview/extra classification per homework set.
   const lessonByPid = new Map();
@@ -321,12 +358,12 @@ async function main() {
     schema: 'gaoqian-blueprint-1',
     generatedAt: new Date().toISOString(),
     course: {
-      name: '历城二中路线一 · 第一阶段 P01',
+      name: '历城二中路线一 · 动态课程蓝图',
       sourceRoot: COURSE,
-      note: '由课程资料自动抽取；仅包含 L01-L05（当前高潜班已发生的课次）。',
+      note: `由课程资料自动抽取；当前发现 ${sessions.length} 个课次，新增课节目录后重跑 npm run blueprint 即可纳入。`,
     },
-    cohort: COHORT,
-    excluded: EXCLUDED,
+    cohort: (snapshot?.students || []).filter((s) => !roles.teachers.has(Number(s.uid))),
+    excluded: (snapshot?.students || []).filter((s) => roles.teachers.has(Number(s.uid))).map((s) => ({ ...s, reason: 'teacher' })),
     sessions,
     problems: Object.fromEntries([...problemIndex.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
   };

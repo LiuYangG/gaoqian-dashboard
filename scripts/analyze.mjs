@@ -12,17 +12,55 @@ const DATA_DIR = path.resolve('data');
 const OUT = path.join(DATA_DIR, 'diagnosis.json');
 const blueprint = await readJson(path.resolve('blueprint/blueprint.json'));
 const snapshot = await readJson(path.join(DATA_DIR, 'snapshot.json'));
-const candidates = [
-  await readJson(path.join(DATA_DIR, 'raw', 'submissions.json')),
-  await readJson(path.join(DATA_DIR, 'raw', 'submissions.partial.json')),
-].filter(Boolean);
-// Prefer the checkpoint with the most completed problems, not merely the final filename.
-candidates.sort((a, b) => (b.stats?.done || 0) - (a.stats?.done || 0));
-const raw = candidates[0] || null;
+
+async function loadRaw() {
+  const lessonDir = path.join(DATA_DIR, 'raw', 'lessons');
+  let files = [];
+  try { files = (await fs.readdir(lessonDir)).filter((f) => f.endsWith('.json')); } catch { /* no per-lesson data yet */ }
+  if (files.length) {
+    const byPid = new Map();
+    let generatedAt = null;
+    let complete = true;
+    for (const file of files) {
+      const lesson = await readJson(path.join(lessonDir, file));
+      if (!lesson) continue;
+      if (lesson.generatedAt && (!generatedAt || lesson.generatedAt > generatedAt)) generatedAt = lesson.generatedAt;
+      if (!lesson.complete) complete = false;
+      for (const p of lesson.problems || []) {
+        if (!byPid.has(p.pid)) byPid.set(p.pid, { pid: p.pid, title: p.title, role: p.role, records: [], pending: true });
+        const target = byPid.get(p.pid);
+        if (!p.pending) target.pending = false;
+        const seen = new Set(target.records.map((r) => r.rid));
+        for (const r of p.records || []) if (!seen.has(r.rid)) { seen.add(r.rid); target.records.push(r); }
+      }
+    }
+    const problems = [...byPid.values()].map((p) => ({ ...p, records: p.records.sort((a, b) => String(a.judgeAt).localeCompare(String(b.judgeAt))) }));
+    return {
+      schema: 'gaoqian-lesson-submissions-1',
+      generatedAt,
+      cutoff: files.length ? new Date(Date.parse('2026-09-10T00:00:00+08:00')).toISOString() : null,
+      complete,
+      problems,
+      stats: {
+        problems: problems.length,
+        done: problems.filter((p) => !p.pending).length,
+        pending: problems.filter((p) => p.pending).length,
+        records: problems.reduce((sum, p) => sum + p.records.length, 0),
+      },
+    };
+  }
+  const legacy = [
+    await readJson(path.join(DATA_DIR, 'raw', 'submissions.json')),
+    await readJson(path.join(DATA_DIR, 'raw', 'submissions.partial.json')),
+  ].filter(Boolean).sort((a, b) => (b.stats?.done || 0) - (a.stats?.done || 0));
+  return legacy[0] || null;
+}
+
+const raw = await loadRaw();
 
 if (!blueprint) throw new Error('缺少 blueprint/blueprint.json，请先运行 npm run blueprint');
 if (!snapshot) throw new Error('缺少 data/snapshot.json，请先抓取看板数据');
-if (!raw) console.warn('提示：data/raw/submissions.json 不存在，诊断将退化为「成绩表选中记录」口径（一次通过率不可用）。');
+if (!raw) console.warn('提示：尚未抓到全量提交流，诊断只使用成绩表选中记录（一次通过率不可用）。');
 
 const diagnosis = analyze({ snapshot, raw, blueprint });
 diagnosis.hash = diagnosisHash(diagnosis);

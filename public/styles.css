@@ -678,3 +678,7 @@ table.matrix tbody tr:hover .sticky-col { background: #fafbff; }
 .diag-warn { border: 1px solid #fcd34d; background: #fffbeb; color: #92400e; border-radius: 12px; padding: 10px 14px; font-size: 12.5px; margin: 0 0 16px; line-height: 1.6; }
 .diag-warn b { margin-right: 8px; }
 .diag-warn code { background: rgba(146,64,14,.08); border-radius: 5px; padding: 1px 5px; font-family: var(--mono); }
+
+.eval-card { border: 1px solid #c7d2fe; background: linear-gradient(180deg, #f5f7ff, #fff); border-radius: 14px; padding: 14px 16px; margin: 0 0 18px; }
+.eval-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; font-size: 12px; font-weight: 800; color: var(--brand); }
+.eval-card p { margin: 0; font-size: 13px; line-height: 1.75; color: var(--ink-2); }

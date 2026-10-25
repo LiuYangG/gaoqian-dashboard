@@ -1,10 +1,10 @@
 {
   "schema": "gaoqian-blueprint-1",
-  "generatedAt": "2026-10-25T06:31:24.888Z",
+  "generatedAt": "2026-10-25T07:45:24.230Z",
   "course": {
-    "name": "历城二中路线一 · 第一阶段 P01",
+    "name": "历城二中路线一 · 动态课程蓝图",
     "sourceRoot": "C:/Users/DELL/Desktop/高潜授课",
-    "note": "由课程资料自动抽取；仅包含 L01-L05（当前高潜班已发生的课次）。"
+    "note": "由课程资料自动抽取；当前发现 5 个课次，新增课节目录后重跑 npm run blueprint 即可纳入。"
   },
   "cohort": [
     {
@@ -20,6 +20,10 @@
       "name": "宋梓赫"
     },
     {
+      "uid": 11099,
+      "name": "刘宸玺"
+    },
+    {
       "uid": 11103,
       "name": "李盈克"
     }
@@ -29,11 +33,6 @@
       "uid": 11104,
       "name": "王丹丹",
       "reason": "teacher"
-    },
-    {
-      "uid": 11099,
-      "name": "刘宸玺",
-      "reason": "new-student"
     }
   ],
   "sessions": [

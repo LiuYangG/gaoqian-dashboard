@@ -34,14 +34,18 @@
     pending: { label: '评测中', short: '…', cls: 'pending' },
     none: { label: '未提交', short: '·', cls: 'none' },
   };
-  // 王丹丹 is a teacher account; 刘宸玺 joined later and has not started.
-  // Both are excluded from class aggregates and rankings, but stay visible in
-  // the raw record list so nothing is silently deleted.
-  const TEACHER_UIDS = new Set([11104]);
-  const NEWBIE_UIDS = new Set([11099]);
-  const AGGREGATE_EXCLUDE = new Set([...TEACHER_UIDS, ...NEWBIE_UIDS]);
-  const aggregateStudents = (hw) => (hw.students || []).filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid)));
-  const displayName = (student) => `${student.name}${NEWBIE_UIDS.has(Number(student.uid)) ? '（新）' : ''}`;
+  // Teacher accounts and not-yet-started students are derived from the current
+  // diagnosis data, so future roster changes need no frontend edit.
+  const teacherUids = () => {
+    const list = (state.diagnosis?.excluded || []).filter((e) => e.reason === 'teacher');
+    const uids = list.length ? list : [{ uid: 11104 }];
+    return new Set(uids.map((e) => Number(e.uid)));
+  };
+  const inactiveUids = () => new Set((state.diagnosis?.inactive || []).map((e) => Number(e.uid)));
+  const isTeacher = (uid) => teacherUids().has(Number(uid));
+  const isInactive = (uid) => inactiveUids().has(Number(uid));
+  const aggregateStudents = (hw) => (hw.students || []).filter((s) => !isTeacher(s.uid) && !isInactive(s.uid));
+  const displayName = (student) => `${student.name}${isInactive(student.uid) ? '（未开始）' : ''}`;
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -124,7 +128,7 @@
   function classSize(hw) {
     const peers = allHomeworks().filter((item) => item.classid === hw.classid && aggregateStudents(item).length > 0);
     if (peers.length) return Math.max(...peers.map((item) => aggregateStudents(item).length));
-    return allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid))).length;
+    return allStudents().filter((s) => !isTeacher(s.uid) && !isInactive(s.uid)).length;
   }
 
   function summarizeHw(hw) {
@@ -233,7 +237,7 @@
   function globalStats() {
     const hws = allHomeworks();
     const active = activeHomeworks();
-    const students = allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid)));
+    const students = allStudents().filter((s) => !isTeacher(s.uid) && !isInactive(s.uid));
     let problems = 0;
     let ac = 0;
     let attempted = 0;
@@ -319,7 +323,7 @@
   function updateTabs() {
     $$('#tabs .tab').forEach((el) => el.classList.toggle('active', el.dataset.tab === state.tab));
     $('#tabHwCount').textContent = allHomeworks().length;
-    $('#tabStudentCount').textContent = allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid))).length;
+    $('#tabStudentCount').textContent = allStudents().filter((s) => !isTeacher(s.uid)).length;
     $('#tabDiagCount').textContent = state.diagnosis?.cohort?.length || 0;
     $('#tabRecordCount').textContent = allRecords().length;
   }
@@ -346,7 +350,7 @@
       $('#autoCheckLabel').firstChild.textContent = '由 GitHub Actions 每天 00:00 更新 · ';
       $('#lastCheck').textContent = generated ? fmtDateTime(generated) : '—';
       $('#footerMeta').textContent = generated
-        ? `${allHomeworks().length} 次作业 · ${allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid))).length} 名有效学员 · ${allRecords().length} 条记录 · 发布于 ${fmtDateTime(generated)}`
+        ? `${allHomeworks().length} 次作业 · ${allStudents().filter((s) => !isTeacher(s.uid) && !isInactive(s.uid)).length} 名有效学员 · ${allRecords().length} 条记录 · 发布于 ${fmtDateTime(generated)}`
         : '尚未发布数据';
       return;
     }
@@ -359,7 +363,7 @@
     }
     $('#syncSub').textContent = generated ? `更新于 ${fmtDateTime(generated)}` : '数据来自 manager.marsoj.cn';
     $('#footerMeta').textContent = generated
-      ? `${allHomeworks().length} 次作业 · ${allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid))).length} 名有效学员 · ${allRecords().length} 条记录 · 更新于 ${fmtDateTime(generated)}`
+      ? `${allHomeworks().length} 次作业 · ${allStudents().filter((s) => !isTeacher(s.uid) && !isInactive(s.uid)).length} 名有效学员 · ${allRecords().length} 条记录 · 更新于 ${fmtDateTime(generated)}`
       : '尚未抓取';
   }
 
@@ -383,7 +387,7 @@
 
   function heatmapHtml() {
     const hws = allHomeworks();
-    const students = allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid)));
+    const students = allStudents().filter((s) => !isTeacher(s.uid) && !isInactive(s.uid));
     const header = ['<div></div>'].concat(hws.map((hw) => `<div class="heat-head" title="${esc(hw.title)}">${esc(hwShort(hw.title))}${hw.noData ? '<br><span class="tiny">待开始</span>' : ''}</div>`)).join('');
     const rows = students.map((student) => {
       const cells = hws.map((hw) => {
@@ -403,7 +407,7 @@
 
   function leaderRows() {
     return allStudents()
-      .filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid)))
+      .filter((s) => !isTeacher(s.uid) && !isInactive(s.uid))
       .map((s) => overallStudent(s.uid))
       .sort((a, b) => b.completion - a.completion || b.score - a.score || a.uid - b.uid);
   }
@@ -688,7 +692,7 @@
   }
 
   function studentsHtml() {
-    const students = allStudents().filter((s) => !AGGREGATE_EXCLUDE.has(Number(s.uid)));
+    const students = allStudents().filter((s) => !isTeacher(s.uid));
     const list = filterStudents(students).map((s) => overallStudent(s.uid)).sort((a, b) => b.completion - a.completion || b.score - a.score);
     return `
       <div class="card">
@@ -703,7 +707,7 @@
               <div style="display:flex;align-items:center;gap:12px">
                 <div class="ring" style="--p:${pctNum(s.completion)};--ring-color:${ringColor}"><b>${pct(s.completion, 0)}</b></div>
                 <div style="min-width:0">
-                  <div class="student-card-head"><div><div class="name">${esc(s.name)}${NEWBIE_UIDS.has(Number(s.uid)) ? ' <span class="badge amber">新学员</span>' : ''}</div><div class="sub">UID ${s.uid}</div></div></div>
+                  <div class="student-card-head"><div><div class="name">${esc(s.name)}${isInactive(s.uid) ? ' <span class="badge amber">未开始</span>' : ''}</div><div class="sub">UID ${s.uid}</div></div></div>
                   <div class="tiny muted" style="margin-top:4px">通过 ${s.ac}/${s.problems} 题 · 总分 ${s.score}</div>
                 </div>
               </div>
@@ -736,7 +740,7 @@
       <div class="profile" style="margin-top:12px">
         ${avatar(student?.name)}
         <div>
-          <h2>${esc(student?.name || uid)}${NEWBIE_UIDS.has(Number(uid)) ? ' <span class="badge amber">新学员 · 未开始</span>' : ''}</h2>
+          <h2>${esc(student?.name || uid)}${isInactive(uid) ? ' <span class="badge amber">未开始</span>' : ''}</h2>
           <p>UID ${uid} · 高潜班学员 · 数据来自 MarsOJ 成绩表</p>
         </div>
         <div class="profile-stats">
@@ -979,7 +983,8 @@
     return diagSessions().map((s) => {
       const meta = diagClassSession(s.id);
       const count = meta ? meta.problems.reduce((sum, p) => sum + p.attempted, 0) : 0;
-      return `<button class="session-chip ${s.id === selected ? 'active' : ''}" data-diag-session="${esc(s.id)}" title="${esc(s.title)}">${esc(s.id)}<small>${esc(s.date.slice(5))} · ${count} 次尝试</small></button>`;
+      const day = s.date ? s.date.slice(5) : '';
+      return `<button class="session-chip ${s.id === selected ? 'active' : ''}" data-diag-session="${esc(s.id)}" title="${esc(s.title)}">${esc(s.id)}<small>${esc(day)} · ${count} 次尝试</small></button>`;
     }).join('');
   }
 
@@ -999,14 +1004,14 @@
         <div class="panel-head">
           <div>
             <h2>全班 · 课次节奏与难度</h2>
-            <p>${esc(meta.title)} · ${esc(meta.date)} ${esc(meta.window?.start || '')}–${esc(meta.window?.end || '')} · 教案 ${meta.totalMinutes || 420} 分钟</p>
+            <p>${esc(meta.title)} · ${esc(meta.date || '日期未配置')} ${esc(meta.window?.start || '')}–${esc(meta.window?.end || '')} · 教案 ${meta.totalMinutes || '—'} 分钟</p>
           </div>
           <div class="session-chips">${sessionsBar(sessionId)}</div>
         </div>
         <div class="diag-stat-row">
           ${diagStat('AC 次数', `${ac}`, `尝试 ${attempted} 次 · 未通过 ${noAC}`)}
           ${diagStat('一次通过率', firstPassKnown ? `${pctRate(firstPass / firstPassKnown)}<small> (${firstPass}/${firstPassKnown})</small>` : '—', '首次提交即 AC', firstPassKnown && firstPass / firstPassKnown < 0.6 ? 'warn' : '')}
-          ${diagStat('教案验收', acceptance.detection ? `${acceptance.detection.count} 题${acceptance.detection.minutes ? ` / ${acceptance.detection.minutes} 分钟` : ''}` : '—', acceptance.detection ? `至少 ${acceptance.detection.minFirstPass} 题一次通过` : '')}
+          ${diagStat('教案验收', acceptance.detection?.count ? `${acceptance.detection.count} 题${acceptance.detection.minutes ? ` / ${acceptance.detection.minutes} 分钟` : ''}` : '—', acceptance.detection?.count ? `至少 ${acceptance.detection.minFirstPass} 题一次通过` : '未配置教案')}
           ${diagStat('待回补', cls.reteach.length, '低一次通过或明显卡题')}
         </div>
         <div class="chart-grid">
@@ -1057,15 +1062,15 @@
     const sessionId = activeDiagSessionId();
     const session = student.sessions.find((s) => s.sessionId === sessionId);
     const chips = diagCohort().map((s) => {
-      const st = diagStudents().find((x) => Number(x.uid) === Number(s.uid));
-      return `<button class="student-chip ${Number(s.uid) === Number(state.diagStudent) || (!state.diagStudent && s === diagCohort()[0]) ? 'active' : ''}" data-diag-student="${s.uid}">${avatar(s.name)}<span>${esc(s.name)}</span></button>`;
+      const active = Number(s.uid) === Number(state.diagStudent) || (!state.diagStudent && s === diagCohort()[0]);
+      return `<button class="student-chip ${active ? 'active' : ''}" data-diag-student="${s.uid}">${avatar(s.name)}<span>${esc(s.name)}${isInactive(s.uid) ? '（未开始）' : ''}</span></button>`;
     }).join('');
     const kpRows = session?.kp || [];
     const findings = student.findings.filter((f) => !session || f.text.includes(diagSessionMeta(sessionId)?.title || ''));
     return `
       <section class="panel diag-panel">
         <div class="panel-head">
-          <div><h2>学员 · 掌握与学习状态证据</h2><p>结论只覆盖 OJ 可观测行为；小测、手算、教师提示未数字化，已标注为证据缺口。</p></div>
+          <div><h2>学员 · 掌握与学习状态证据</h2><p>结论只基于 OJ 提交与评测时间；点击上方学员和课次按钮切换。</p></div>
           <div class="student-chips">${chips}</div>
         </div>
         <div class="diag-stat-row">
@@ -1074,6 +1079,10 @@
           ${diagStat('课内 AC', student.summary.inClassAC, `课后补做 ${student.summary.catchupAttempted} 题`)}
           ${diagStat('平均提交次数', student.summary.avgAttempts ?? '—', `放弃 ${student.summary.giveUps} 题 · 节奏 ${student.summary.paceMedianRatio ?? '—'}×`)}
         </div>
+        ${session?.evaluation ? `<div class="eval-card">
+          <div class="eval-head"><span>本节课评价（教师查看）</span><span class="badge indigo">${esc(session.sessionId)} · ${esc(session.date || '')}</span></div>
+          <p>${esc(session.evaluation)}</p>
+        </div>` : ''}
         <div class="diag-two-col">
           <div>
             <div class="chart-title">诊断结论（${esc(diagSessionMeta(sessionId)?.title || '全部课次')}）</div>
@@ -1098,7 +1107,7 @@
         <div class="table-wrap"><table class="data compact lesson-table">
           <thead><tr><th>课次</th><th class="right">完成</th><th class="right">一次通过</th><th class="right">课内 AC</th><th class="right">课后补做</th><th class="right">节奏倍率</th><th class="right">放弃</th><th>结论</th></tr></thead>
           <tbody>${student.sessions.map((s) => `<tr class="clickable ${s.sessionId === sessionId ? 'selected' : ''}" data-diag-lesson="${esc(s.sessionId)}">
-            <td><b>${esc(s.sessionId)}</b> <span class="muted tiny">${esc(s.date.slice(5))}</span></td>
+            <td><b>${esc(s.sessionId)}</b> <span class="muted tiny">${esc(s.date ? s.date.slice(5) : '—')}</span></td>
             <td class="right num">${s.ac}/${s.formalTotal}</td>
             <td class="right num">${s.firstPassRate == null ? '—' : pctRate(s.firstPassRate)}</td>
             <td class="right num">${s.inClassAC}</td>
@@ -1125,7 +1134,7 @@
           <td class="right num">${p.minutes ?? '—'}′</td>
           <td class="tiny">${p.firstAt ? fmtDateTime(p.firstAt) : '—'}</td>
           <td>${p.firstStatus ? `<span class="status-chip ${recordTone(p.firstStatus)}">${esc(p.firstStatus)}</span>` : '—'}</td>
-          <td class="tiny">${p.dataPending ? '未抓取' : esc(phaseLabel(p.firstPhase))}</td>
+          <td class="tiny">${esc(phaseLabel(p.firstPhase))}</td>
           <td class="right num">${p.attempts || '—'}</td>
           <td class="right num">${p.solveMinutes == null ? '—' : `${p.solveMinutes}′`}</td>
           <td class="right num ${p.paceRatio > 2 ? 'bad-text' : ''}">${p.paceRatio == null ? '—' : `${p.paceRatio}×`}</td>
@@ -1146,13 +1155,12 @@
     const dv = overall.difficultyValidation || {};
     const holdout = overall.holdout || {};
     const split = overall.splitHalf || {};
-    const dq = overall.dataQuality || {};
     const method = state.diagnosis?.method || {};
     const sensitivity = overall.sensitivity || [];
     const maxDelta = sensitivity.reduce((max, r) => Math.max(max, Math.abs(r.delta || 0)), 0);
     return `
       <section class="panel diag-panel" id="diagMethod">
-        <div class="panel-head"><div><h2>方法与证据缺口</h2><p>这一页说明每个数字怎么来的、哪里不可靠；没有黑箱分数。</p></div></div>
+        <div class="panel-head"><div><h2>方法与验证</h2><p>这一页说明每个数字怎么来的、可靠性如何；没有黑箱分数。</p></div></div>
         <div class="diag-two-col">
           <div>
             <div class="chart-title">构念与公式</div>
@@ -1166,20 +1174,12 @@
               <thead><tr><th>检查</th><th>结果</th><th>解释</th></tr></thead>
               <tbody>
                 <tr><td>难度梯度一致性</td><td><b>ρ=${dv.spearman ?? '—'}</b><br><span class="tiny muted">置换 p=${dv.permutationP ?? '—'} · n=${dv.n ?? '—'}</span></td><td class="tiny">教案梯度越难，一次通过率应越低。负值符合预期；p 值仅作参考。</td></tr>
-                <tr><td>用时梯度一致性</td><td><b>ρ=${dv.ratioSpearman ?? '—'}</b><br><span class="tiny muted">p=${dv.ratioPermutationP ?? '—'}</span></td><td class="tiny">梯度越难，实际用时倍率应越高。</td></tr>
+                <tr><td>节奏梯度一致性</td><td><b>ρ=${dv.ratioSpearman ?? '—'}</b><br><span class="tiny muted">p=${dv.ratioPermutationP ?? '—'}</span></td><td class="tiny">梯度越难，相邻首次提交间隔相对建议时长应越长。</td></tr>
                 <tr><td>分半信度</td><td><b>${split.rho ?? '—'}</b><br><span class="tiny muted">Spearman-Brown=${split.spearmanBrown ?? '—'}</span></td><td class="tiny">奇偶题分组后学员表现的一致性；n=${split.n ?? '—'}，只作粗略稳定性检查。</td></tr>
                 <tr><td>留出课次预测</td><td><b>MAE ${holdout.modelMae ?? '—'}</b><br><span class="tiny muted">班级均值基线 ${holdout.classMeanMae ?? '—'} · ${esc(holdout.verdict || '')}</span></td><td class="tiny">用前几课预测下一课一次通过率；n=${holdout.n ?? '—'}。${esc(holdout.baselineNote || '')}</td></tr>
                 <tr><td>当堂 vs 全部</td><td><b>${maxDelta ? pctRate(maxDelta) : '—'}</b></td><td class="tiny">只统计当堂首次提交后，各学员一次通过率的最大变化；变化越大，结论越依赖口径。</td></tr>
-                <tr><td>数据覆盖</td><td><b>${pctRate(dq.coverage?.rate)}</b><br><span class="tiny muted">一次通过覆盖 ${pctRate(dq.firstPassCoverage?.rate)}</span></td><td class="tiny">${dq.coverage?.covered ?? '—'}/${dq.coverage?.cells ?? '—'} 个「学员×正式题」单元有任一提交；一次通过还需要完整提交流，当前覆盖 ${dq.firstPassCoverage?.known ?? '—'} 个单元${dq.rawComplete === false ? '（抓取尚未全部完成）' : ''}。</td></tr>
               </tbody>
             </table></div>
-            <div class="chart-title" style="margin-top:16px">数据缺口</div>
-            <div class="gap-list">
-              <div><b>小测成绩</b><span class="badge">缺失</span><p>15 题小测（80 及格）目前只有纸质/口头记录；本页不能声称「知识检测达标」。</p></div>
-              <div><b>手算与口述</b><span class="badge">缺失</span><p>教案要求的手推循环、状态表、边界解释没有数字化。</p></div>
-              <div><b>教师提示与本地验收</b><span class="badge">缺失</span><p>「独立完成」与「提示后完成」无法从 OJ 区分；一次通过率是近似下界。</p></div>
-              <div><b>10/10 课次</b><span class="badge">未纳入</span><p>当天只有 5 条记录，未按正式课次统计；这些尝试计入「课后补做」。</p></div>
-            </div>
           </div>
         </div>
         <div class="chart-title" style="margin-top:16px">局限</div>
@@ -1192,40 +1192,31 @@
       </section>`;
   }
 
-  function diagCoverageWarning() {
-    const dq = state.diagnosis?.class?.overall?.dataQuality || {};
-    const rate = dq.firstPassCoverage?.rate;
-    if (dq.rawComplete === true && (rate == null || rate >= 0.85)) return '';
-    const done = dq.rawDone ?? '—';
-    const total = dq.rawProblems ?? '—';
-    return `<div class="diag-warn"><b>数据未完整</b>全量提交流已抓 ${done}/${total} 题，一次通过率覆盖 ${pctRate(rate)} 的「学员×正式题」单元；未覆盖的题显示「未做 / —」，不能当作不会。重新运行 <code>npm run raw</code> 会从检查点继续。</div>`;
-  }
-
   function renderDiagnosis() {
     if (!state.diagnosis) {
       return `<div class="panel empty-diag">
         <h3>还没有诊断数据</h3>
         <p>运行 <code>npm run analyze</code> 生成 <code>data/diagnosis.json</code>；本地模式下也可在抓取完成后自动生成。</p>
-        <p class="muted tiny">诊断需要：课程蓝图（blueprint/）、成绩表快照（data/snapshot.json）、全量提交流（data/raw/submissions.json）。</p>
+        <p class="muted tiny">诊断需要：课程蓝图（blueprint/）、成绩表快照（data/snapshot.json）、每节课全量提交流（data/raw/lessons/）。</p>
       </div>`;
     }
     const cohort = diagCohort();
+    const activeCount = state.diagnosis.stats?.activeStudents ?? cohort.length;
     if (!state.diagStudent && cohort.length) state.diagStudent = cohort[0].uid;
     if (!state.diagSession) state.diagSession = diagSessions()[diagSessions().length - 1]?.id || null;
     return `
       <div class="diag-head">
         <div>
           <h2>课次学情诊断</h2>
-          <p>${cohort.length} 名有效学员 · ${diagSessions().length} 次课 · 数据 ${esc(fmtDateTime(state.diagnosis.generatedAt))} ·
-            <a href="#diagMethod">方法与证据缺口 ↓</a></p>
+          <p>${cohort.length} 名学员（${activeCount} 名有提交） · ${diagSessions().length} 次课 · 数据 ${esc(fmtDateTime(state.diagnosis.generatedAt))} ·
+            <a href="#diagMethod">方法与验证 ↓</a></p>
         </div>
         <div class="diag-head-meta">
           <span class="badge indigo">一次通过 = 首次提交 AC</span>
           <span class="badge">掌握对齐课程验收</span>
-          <span class="badge">n=${cohort.length}，仅作描述</span>
+          <span class="badge">仅统计 OJ 提交行为</span>
         </div>
       </div>
-      ${diagCoverageWarning()}
       ${diagClassHtml()}
       ${diagStudentHtml()}
       ${diagMethodHtml()}
@@ -1816,7 +1807,7 @@
   }
 
   document.addEventListener('click', (event) => {
-    const target = event.target.closest('[data-action],[data-tab],[data-hw],[data-student],[data-record],[data-page]');
+    const target = event.target.closest('[data-action],[data-tab],[data-hw],[data-student],[data-record],[data-page],[data-diag-session],[data-diag-student],[data-diag-lesson]');
     if (!target) return;
 
     if (target.dataset.tab) {
@@ -1947,6 +1938,14 @@
     if (studentParam && allStudents().some((s) => Number(s.uid) === Number(studentParam))) {
       state.studentId = Number(studentParam);
       state.tab = 'students';
+    }
+    const diagStudentParam = params.get('diagStudent');
+    if (diagStudentParam && (state.diagnosis?.cohort || []).some((s) => Number(s.uid) === Number(diagStudentParam))) {
+      state.diagStudent = Number(diagStudentParam);
+    }
+    const diagSessionParam = params.get('session');
+    if (diagSessionParam && (state.diagnosis?.sessions || []).some((s) => s.id === diagSessionParam)) {
+      state.diagSession = diagSessionParam;
     }
     const recHwParam = params.get('recHw');
     if (recHwParam && findHw(recHwParam)) state.recHw = recHwParam;

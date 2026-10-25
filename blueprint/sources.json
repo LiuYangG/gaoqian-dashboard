@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T06:31:24.888Z",
+  "generatedAt": "2026-10-25T07:45:24.230Z",
   "courseRoot": "C:/Users/DELL/Desktop/高潜授课",
   "files": [
     {
@@ -85,6 +85,78 @@
       "lesson": "L05",
       "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L05-循环嵌套、枚举与数字拆位\\BUILD-REPORT.json",
       "sha256": "3ca14bde99ac38022abb4816d60dbd24e05ecd00460263606c71fb16c4403742"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L06",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L06-一维数组与计数思想\\教师版\\01-教师教案.md",
+      "sha256": "457eee9613b398a3bc84c7d6a9aa837151de90beafe2112dc85314367c4e8d91"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L06",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L06-一维数组与计数思想\\BUILD-REPORT.json",
+      "sha256": "61dec0583a5adb5e8bb745da0c889a8e5e1b57edfb8d2b5c84c3d55d240edb7c"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L07",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L07-二维数组与网格处理\\教师版\\01-教师教案.md",
+      "sha256": "2b22b7223aa33149082f1ea65954b87277e669a04f15e75b796d6b378b75006e"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L07",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L07-二维数组与网格处理\\BUILD-REPORT.json",
+      "sha256": "0e63f8cee620e7d118739ae8e48d322ec2a26de6dc1784f777b5b302bab962ce"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L08",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L08-字符、ASCII与string\\教师版\\01-教师教案.md",
+      "sha256": "eb518998f3ee4fc084237183a6ee9e8fb39985d9bf830a116da6f859f4fa1215"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L09",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L09-函数、参数、引用与作用域\\教师版\\01-教师教案.md",
+      "sha256": "cabc1f879d87a92e8ae27f99979f0eec17119a148206058c349cc195aff3b1f3"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L10",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L10-结构体、vector与sort\\教师版\\01-教师教案.md",
+      "sha256": "cb4ef0dc8dd054b5c3db27fcd53971e2e4e30d3eda87e79aa2551c8ffe76850a"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L11",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L11-桶、去重与基础排序原理\\教师版\\01-教师教案.md",
+      "sha256": "1a23eff0fc14da92dd446ad96852749a5e050a2c40d98fedfb90667167b6bacf"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L12",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L12-进制、二进制编码与地址基础\\教师版\\01-教师教案.md",
+      "sha256": "d95fde38d3b4408b300fdfc7eda938ae0f123b32062328bbaf1029a060495108"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L13",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L13-标准函数、输入输出与常见错误\\教师版\\01-教师教案.md",
+      "sha256": "3ac68cc0f2650d1dbede42bbb330c0c9dc156a0158ef24ba4d49756865c96b72"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L14",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L14-语法综合：小型数据处理项目\\教师版\\01-教师教案.md",
+      "sha256": "8e6770704ccd7af18263392201f169deac7080676248966cd3f3f6f2cd2dc1fa"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L15",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L15-阶段测评、讲评与错因复盘\\教师版\\01-教师教案.md",
+      "sha256": "2ffff9a0f6c75abd1e031014b627c1bbb8ab22efecf770af035e3be1a0751114"
     }
   ]
 }
