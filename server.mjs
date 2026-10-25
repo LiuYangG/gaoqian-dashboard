@@ -168,6 +168,16 @@ const server = http.createServer(async (req, res) => {
     return json(res, 200, snapshot);
   }
 
+  if (pathname === '/api/diagnosis') {
+    try {
+      const text = await fs.readFile(path.join(__dirname, 'data', 'diagnosis.json'), 'utf8');
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+      return res.end(text);
+    } catch {
+      return json(res, 404, { error: '尚未生成诊断，请先运行 npm run analyze' });
+    }
+  }
+
   if (pathname === '/api/check') {
     const result = await runCheck();
     return json(res, result ? 200 : 503, result || { error: '检测失败' });

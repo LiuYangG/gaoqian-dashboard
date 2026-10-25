@@ -1,0 +1,90 @@
+{
+  "generatedAt": "2026-10-25T06:31:24.888Z",
+  "courseRoot": "C:/Users/DELL/Desktop/高潜授课",
+  "files": [
+    {
+      "kind": "lesson-plan",
+      "lesson": "L01",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L01-程序设计、竞赛与在线评测入门\\教师版\\01-教师教案.md",
+      "sha256": "9ed03ea8af3228985305046f9c9c8a6e3fd982c5d9e0650ffdc3f3af920c4e19"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L01",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L01-程序设计、竞赛与在线评测入门\\BUILD-REPORT.json",
+      "sha256": "708bdfc4967260317afe9dac80ad8dfe40d8c04f565abc6d8e35789c37d174a8"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L02",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L02-变量、类型、输入与运算\\教师版\\01-教师教案.md",
+      "sha256": "7d6e972fa6f4b9efdacda672dd7e3e4479137b383d602defd8a48b4d961eb137"
+    },
+    {
+      "kind": "dual-review",
+      "lesson": "L02",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L02-变量、类型、输入与运算\\教师版\\验证材料\\双评记录.json",
+      "sha256": "7d6b10e0ea54e1d3e2234c747a650924d9bd395b7a46389e0b708c8adf0effc8"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L02",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L02-变量、类型、输入与运算\\BUILD-REPORT.json",
+      "sha256": "f6cafee45ae664d5513a5ed95f95638cbe3b50b5b2bdcb355c49ed869f199db2"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L03",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L03-比较、逻辑与分支结构\\教师版\\01-教师教案.md",
+      "sha256": "b656abf2920c82e7a7d89b8271ae93f7ce782de8464c795a968e27bdbd144164"
+    },
+    {
+      "kind": "dual-review",
+      "lesson": "L03",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L03-比较、逻辑与分支结构\\教师版\\验证材料\\双评记录.json",
+      "sha256": "915c9530d532a9e8460a60a44484ad0b6788d471c81649cc716710980741d107"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L03",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L03-比较、逻辑与分支结构\\BUILD-REPORT.json",
+      "sha256": "beadf75d2c8e760264bb13cddec8f753e97d91e58b752d970bd37ad02d0c81ee"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L04",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L04-while、for与循环状态\\教师版\\01-教师教案.md",
+      "sha256": "b0e936b8b4b8e3156d2ad5de64e2234ce8b1676bce131ac0dba2378d7dff2165"
+    },
+    {
+      "kind": "dual-review",
+      "lesson": "L04",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L04-while、for与循环状态\\教师版\\验证材料\\双评记录.json",
+      "sha256": "c60061a9f43422a713ff7e15c2e963ba3cc99fc2e4b8a7e00a106c88808893d7"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L04",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L04-while、for与循环状态\\BUILD-REPORT.json",
+      "sha256": "c12959ef31ed51ceaf8d1aca0d12b2f339e584aa3da13ab51e0e4f06ec3172b2"
+    },
+    {
+      "kind": "lesson-plan",
+      "lesson": "L05",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L05-循环嵌套、枚举与数字拆位\\教师版\\01-教师教案.md",
+      "sha256": "d145069112bd055c5eeac8b8c519fa4578da879d96d2761dd4b1503584e7f7e3"
+    },
+    {
+      "kind": "dual-review",
+      "lesson": "L05",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L05-循环嵌套、枚举与数字拆位\\教师版\\验证材料\\双评记录.json",
+      "sha256": "08b2c7e68baea5d6b428fc31e25d776a454e412426d7686fec04195a76b50b31"
+    },
+    {
+      "kind": "build-report",
+      "lesson": "L05",
+      "file": "C:\\Users\\DELL\\Desktop\\高潜授课\\第一阶段\\R1-P01-L05-循环嵌套、枚举与数字拆位\\BUILD-REPORT.json",
+      "sha256": "3ca14bde99ac38022abb4816d60dbd24e05ecd00460263606c71fb16c4403742"
+    }
+  ]
+}

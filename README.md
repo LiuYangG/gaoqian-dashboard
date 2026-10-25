@@ -1,57 +1,75 @@
 # 高潜作业 · 学情看板
 
-把 MarsOJ 上所有“高潜”作业的学员完成情况、逐题状态和做题记录，汇总成一个可交互的可视化看板。
+把 MarsOJ 上「高潜」作业的完成情况、**每一次提交**、课堂节奏和知识点证据，汇总成一个可交互的看板。
+这个版本不是「更多图表」，而是把数据底座从「成绩表里每格一条选中记录」换成「全量提交流 + 课程蓝图」，
+让每条学情结论都能追到具体提交。
 
 ## 启动
 
 ```bash
-node server.mjs
-```
+# 首次：从课程资料抽取蓝图（已提交 blueprint/，只有课程资料更新时才需要重跑）
+npm run blueprint
 
-Windows 下也可以直接双击 `启动看板.bat`。
+# 抓取 + 诊断（约 10–20 分钟，取决于平台接口速度）
+npm run scrape
 
-打开 <http://127.0.0.1:43130>。
-
-也可以使用：
-
-```bash
+# 启动本地看板
 npm start
+
+# 校验
+npm test          # 纯函数单测
+npm run verify    # 数据 + 诊断一致性检查
 ```
 
-## 使用
+打开 <http://127.0.0.1:43130>，在「学情诊断」页查看课次诊断。
 
-1. 打开页面后，点击右上角 **抓取最新数据**。
-2. 系统会依次：
-   - 登录管理端 `manager.marsoj.cn`；
-   - 检索标题中包含“高潜”的作业（支持 `高潜001`、`山东高潜01` 等命名）；
-   - 读取每次作业的题目、成绩表和学员名单；
-   - 登录学员端 `marsoj.cn`，逐条抓取每位学员每道题的评测记录与代码；
-   - 写入 `data/snapshot.json`，页面自动刷新。
-3. 抓取过程中会显示进度。首次抓取约 2–3 分钟（取决于记录数量），再次抓取会重新拉取最新记录。
+平台的全量提交流接口较慢（越深的页越慢），`npm run scrape` 默认按 12 分钟预算抓取并在 `data/raw/submissions.partial.json` 断点续抓；未抓完的题会在诊断页顶部标「数据未完整」，再次运行会继续。GitHub Actions 用 `data/raw` 缓存跨天累积。
 
-## 页面功能
+Windows 下也可以双击 `启动看板.bat`（只启动，不抓取）。
 
-- **总览**：作业数、学员数、题目数、提交记录、平均完成率；作业趋势、题目状态分布、学员 × 作业完成热力图、学员排行。
-- **作业分析**：单次作业的学员排名、逐题完成矩阵、逐题 AC 率与难度。
-- **学员画像**：每位学员的整体完成率、各次作业完成率雷达图、逐题状态、最近提交。
-- **提交记录**：按作业 / 学员 / 状态筛选，分页查看全部记录；点击任意记录查看代码、评测详情和测试点。
-- **导出**：提交记录页支持导出当前筛选结果为 CSV。
-- **新增作业检测**：服务端每 5 分钟自动检索一次新作业；页面打开时也会立即检测。发现新作业后顶部会出现提示，抓取后自动加入看板并标记“新增”。
+## 学情诊断怎么算
 
-## 数据与配置
+诊断只覆盖 **4 名有效学员 × 5 次课**（9/12、9/19、9/26、10/17、10/24）。王丹丹为教师、刘宸玺为新学员，已排除出统计口径。
 
-- `data/snapshot.json`：最近一次抓取的完整快照（页面读取此文件）。
-- `data/known-homeworks.json`：已发现的作业基线，用于判断“新增”。
-- `data/record-cache.json`：做题记录缓存，便于重复抓取时加速。
+- **完成情况**：正式题最终 AC 数 / 20；拆成课内完成、课后补做、提交未通过、未做。
+- **掌握（对齐课程验收）**：一次通过率 = 首次有效提交即 AC 的正式题数 / 有记录正式题数。
+  另对照课程自己的验收标准（4 题检测、课内 16/20、小测 80 分）。
+- **学习状态**：每题实际用时 / 教案建议时长（节奏）、重试与放弃（坚持）、当堂活跃时段与中断（投入）、超前与补做。
+- **知识点**：题目 → 双评知识点 → 按知识点聚合首次通过率与覆盖。
+- **独立性提示**：同题提交时间邻近 + AC 代码相似度，只作提示，不作抄袭结论。
 
-项目不再内置账号密码。首次运行请复制 `.env.example` 为 `.env`，填入 MarsOJ 账号：
+「学情诊断」页末尾的「方法与证据缺口」列出所有定义、公式、内部验证（难度梯度一致性、分半信度、留出课次预测、敏感性分析）和数据缺口（小测、手算、教师提示未数字化）。
+
+## 数据与目录
+
+```
+blueprint/blueprint.json   课次 → 题目 → 知识点 → 梯度 → 建议时长 → 验收标准（由课程资料抽取，已提交）
+blueprint/sources.json     课程资料来源与 SHA-256（审计用）
+data/snapshot.json         成绩表快照：每格选中的记录、代码、测试点
+data/raw/submissions.json  全量提交流：每题每次提交的 status/uid/judgeAt（不提交）
+data/diagnosis.json        诊断结果（静态构建时复制到 dist/diagnosis.json）
+data/known-homeworks.json  新增作业基线
+data/record-cache.json     记录缓存
+public/                    页面与交互
+scripts/extract-blueprint.mjs  课程资料 → 蓝图
+scripts/scrape-raw.mjs         全量提交流抓取（断点续抓）
+scripts/analyze.mjs            蓝图 + 快照 + 提交流 → 诊断
+scripts/verify.mjs             数据与诊断一致性检查
+tests/analytics.test.mjs       纯函数单测
+```
+
+`data/` 已加入 `.gitignore`，学员数据不会提交到 GitHub。`blueprint/` 会提交，因为 GitHub Actions 访问不到本地课程资料目录。
+
+## 配置
+
+首次运行复制 `.env.example` 为 `.env`，填入 MarsOJ 账号：
 
 ```powershell
 Copy-Item .env.example .env
 notepad .env
 ```
 
-`.env` 已被 `.gitignore` 排除，不会提交到 GitHub。也可以直接用环境变量：
+`.env` 已被 `.gitignore` 排除。也可以直接用环境变量：
 
 ```powershell
 $env:MARS_USER="你的账号"
@@ -60,58 +78,33 @@ $env:PORT="43130"
 node server.mjs
 ```
 
-其他可调参数：
+可调参数：
 
-- `MARS_CONCURRENCY`：做题记录抓取并发数，默认 `6`。
+- `MARS_CONCURRENCY`：抓取并发数，默认 `6`（平台接口较慢，过高会被拖慢）。
+- `RAW_BUDGET_MS`：全量提交流抓取的时间预算，默认 12 分钟；未完成的问题会标记 `pending`，下次运行从检查点继续。
 - `AUTO_CHECK_MS`：自动检测新作业的间隔，默认 `300000`（5 分钟）；设为 `0` 可关闭。
 
-## 部署到 GitHub Pages（公开访问）
+## 部署到 GitHub Pages
 
-公开版使用 **GitHub Actions 每天 00:00（北京时间）自动抓取 + GitHub Pages 静态展示**。GitHub Pages 不能运行 Node 服务，所以公开页面的“刷新页面数据”只加载最近一次发布的数据，真正抓取由 Actions 完成。
+公开版使用 **GitHub Actions 每天 00:00（北京时间）自动抓取 + 静态展示**。Pages 不能运行 Node 服务，所以页面只读取最近一次发布的数据。
 
-1. 在 GitHub 新建一个空仓库（建议 Public，免费 Pages 不需要额外套餐），不要勾选初始化 README。
-2. 进入仓库 **Settings → Secrets and variables → Actions → New repository secret**，添加：
-   - `MARS_USER`：MarsOJ 账号
-   - `MARS_PASS`：MarsOJ 密码
-3. 进入 **Settings → Pages → Build and deployment → Source**，选择 **GitHub Actions**。
-4. 在本项目目录关联并推送仓库：
+1. 仓库 **Settings → Secrets and variables → Actions** 中添加 `MARS_USER`、`MARS_PASS`。
+2. **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
+3. 推送后到 **Actions → Deploy dashboard → Run workflow** 手动运行一次；首次抓取约 2–3 分钟，加上全量提交流约 10–20 分钟。
+4. 之后每天北京时间 00:00 自动更新；工作流文件为 `.github/workflows/pages.yml`。
 
-   ```powershell
-   git remote add origin https://github.com/<你的用户名>/<仓库名>.git
-   git branch -M main
-   git push -u origin main
-   ```
+> 公开页面会展示真实姓名、成绩、提交代码与诊断结论（当前配置），并已添加 `noindex` / `robots.txt` 禁止搜索引擎收录。请只在可信范围内分享链接。
 
-5. 打开仓库 **Actions → Deploy dashboard → Run workflow**，手动运行一次；首次抓取约 2–3 分钟。
-6. 运行完成后，在 **Settings → Pages** 或 Actions 的部署记录中查看网址，通常为：
+## 口径与局限
 
-   ```text
-   https://<你的用户名>.github.io/<仓库名>/
-   ```
-
-之后每天北京时间 00:00 自动更新；也可以随时到 Actions 页面手动运行。工作流文件为 `.github/workflows/pages.yml`。更细的逐步清单见 [GITHUB_DEPLOY.md](GITHUB_DEPLOY.md)。
-
-> 公开页面会展示真实学员姓名、成绩和提交代码（当前配置），并已添加 `noindex` / `robots.txt` 禁止搜索引擎收录。请只在可信范围内分享链接。
-
-## 目录
-
-```
-server.mjs              本地服务：静态页面、抓取 API、SSE 进度、定时检测
-scraper.mjs             登录、检索作业、成绩表解析、记录抓取与解析
-run-scrape.mjs          命令行抓取入口
-scripts/build-static.mjs 生成 GitHub Pages 静态发布目录 dist/
-.github/workflows/pages.yml 每天 00:00（北京时间）抓取并部署 Pages
-public/index.html       页面结构
-public/styles.css       视觉样式
-public/app.js           交互、图表、筛选、详情抽屉
-public/vendor/          本地 ECharts
-data/                   抓取结果与基线
-```
+- 平台只提供 `judgeAt`（评测时间），没有 `submitAt`；时间差通常在数秒内，对分钟级节奏分析影响可忽略。
+- 全量提交流接口按记录 id 分页，越深的页越慢；抓取按时间预算断点续抓，诊断页会显示覆盖率与 `pending` 情况。
+- 小测、手算口述、教师提示与本地冻结测试尚未数字化；「掌握」结论只覆盖 OJ 可观测部分。
+- 当堂/课后按北京时间 09:00–16:30 划分；上午讲授、下午练习的实际切换点未逐课记录，时间分布只作描述。
+- 样本量小（4 人 × 5 课），所有比例都是描述性证据，不做显著性排名或总体推断。
 
 ## 说明
 
-- 本地数据保存在 `data/`，已加入 `.gitignore`，不会提交到 GitHub。
-- 公开页面会展示真实姓名、成绩和代码（当前配置）；已添加 noindex/robots 禁止搜索引擎收录，请谨慎分享链接。
 - 看板只读取 MarsOJ 中当前账号有权限访问的作业与学员数据。
 - 若学员端登录失效，抓取会自动重新登录一次；连续失败会在页面提示。
 - GitHub Actions 的抓取凭据只存放在仓库 Secrets 中，不会出现在代码或日志里。

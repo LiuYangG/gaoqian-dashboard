@@ -1,0 +1,5605 @@
+{
+  "schema": "gaoqian-blueprint-1",
+  "generatedAt": "2026-10-25T06:31:24.888Z",
+  "course": {
+    "name": "历城二中路线一 · 第一阶段 P01",
+    "sourceRoot": "C:/Users/DELL/Desktop/高潜授课",
+    "note": "由课程资料自动抽取；仅包含 L01-L05（当前高潜班已发生的课次）。"
+  },
+  "cohort": [
+    {
+      "uid": 11095,
+      "name": "辛嘉泽"
+    },
+    {
+      "uid": 11097,
+      "name": "王柯铭"
+    },
+    {
+      "uid": 11098,
+      "name": "宋梓赫"
+    },
+    {
+      "uid": 11103,
+      "name": "李盈克"
+    }
+  ],
+  "excluded": [
+    {
+      "uid": 11104,
+      "name": "王丹丹",
+      "reason": "teacher"
+    },
+    {
+      "uid": 11099,
+      "name": "刘宸玺",
+      "reason": "new-student"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "L01",
+      "lesson": 1,
+      "title": "程序设计、竞赛与在线评测入门",
+      "date": "2026-09-12",
+      "homework": "山东高潜01",
+      "window": {
+        "start": "09:00",
+        "end": "16:30",
+        "lunch": "12:00-13:30"
+      },
+      "totalMinutes": 420,
+      "modules": [
+        {
+          "from": 0,
+          "to": 35,
+          "minutes": 35,
+          "label": "计算机、文件、键盘、输入法、符号；短程序录入"
+        },
+        {
+          "from": 35,
+          "to": 85,
+          "minutes": 50,
+          "label": "程序结构、main、注释、执行顺序、cout"
+        },
+        {
+          "from": 85,
+          "to": 95,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 95,
+          "to": 140,
+          "minutes": 45,
+          "label": "int/double/char、变量、cin、格式化输出"
+        },
+        {
+          "from": 140,
+          "to": 150,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 150,
+          "to": 180,
+          "minutes": 30,
+          "label": "编译、运行、提交、AC/CE/WA/RE/TLE"
+        },
+        {
+          "from": 180,
+          "to": 230,
+          "minutes": 50,
+          "label": "正式题训练一：D1 为主"
+        },
+        {
+          "from": 230,
+          "to": 240,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 240,
+          "to": 290,
+          "minutes": 50,
+          "label": "正式题训练二：D2 前半"
+        },
+        {
+          "from": 290,
+          "to": 300,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 300,
+          "to": 350,
+          "minutes": 50,
+          "label": "正式题训练三：D2 后半与 D3"
+        },
+        {
+          "from": 350,
+          "to": 360,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 360,
+          "to": 380,
+          "minutes": 20,
+          "label": "15 题小测"
+        },
+        {
+          "from": 380,
+          "to": 420,
+          "minutes": 40,
+          "label": "提交、最低 3 题验收、调试记录、备用题"
+        }
+      ],
+      "acceptance": {
+        "detection": {
+          "count": 3,
+          "minutes": 40,
+          "minFirstPass": 3,
+          "quote": "提交、最低 3 题验收、调试记录、备用题"
+        },
+        "quiz": {
+          "count": 15,
+          "pass": 80,
+          "quote": "15 题，100 分，80 分达标"
+        },
+        "inClassTarget": null,
+        "postClassTarget": null,
+        "quote": "达标：D1 全部、D2 至少 4 题、小测不少于 80 分。"
+      },
+      "problems": [
+        {
+          "pid": "P1000",
+          "title": "",
+          "role": "formal",
+          "order": 1,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "固定文本输出"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv10101",
+          "title": "",
+          "role": "formal",
+          "order": 2,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "多行输出",
+            "换行"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv10102",
+          "title": "",
+          "role": "formal",
+          "order": 3,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "空格与图形输出"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kz01",
+          "title": "",
+          "role": "formal",
+          "order": 4,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "行首空格"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kz02",
+          "title": "",
+          "role": "formal",
+          "order": 5,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "复杂固定图形"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kz03",
+          "title": "",
+          "role": "formal",
+          "order": 6,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "算术表达式"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kz04",
+          "title": "",
+          "role": "formal",
+          "order": 7,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "文本与计算拼接"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kz08",
+          "title": "",
+          "role": "formal",
+          "order": 8,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "三个变量输入输出"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kh02",
+          "title": "",
+          "role": "formal",
+          "order": 9,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "三数求和"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kh03",
+          "title": "",
+          "role": "formal",
+          "order": 10,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "临时变量交换"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kh05",
+          "title": "",
+          "role": "formal",
+          "order": 11,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "固定格式输出"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "P1041",
+          "title": "",
+          "role": "formal",
+          "order": 12,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "变量嵌入句式"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "P1038",
+          "title": "",
+          "role": "formal",
+          "order": 13,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "整数除法与取余"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "P1039",
+          "title": "",
+          "role": "formal",
+          "order": 14,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "公式与运算顺序"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv102kz04",
+          "title": "",
+          "role": "formal",
+          "order": 15,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "double",
+            "五位小数"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv102kz05",
+          "title": "",
+          "role": "formal",
+          "order": 16,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "字符编码"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv102kz06",
+          "title": "",
+          "role": "formal",
+          "order": 17,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "数字字符编码"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "P2117",
+          "title": "",
+          "role": "formal",
+          "order": 18,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "数位拆分",
+            "前导零"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv102kz07",
+          "title": "",
+          "role": "formal",
+          "order": 19,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 14,
+          "knowledge": [
+            "数字字符转数字"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv102kh03",
+          "title": "",
+          "role": "formal",
+          "order": 20,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 14,
+          "knowledge": [
+            "相邻字符"
+          ],
+          "quality": "",
+          "implementation": null,
+          "thinking": null,
+          "source": "教案"
+        },
+        {
+          "pid": "lv101kz05",
+          "title": "求一个三位数各个数位上的数字之和",
+          "role": "backup",
+          "order": 21,
+          "tier": null,
+          "tierLabel": "",
+          "minutes": null,
+          "knowledge": [
+            "求一个三位数各个数位上的数字之和"
+          ],
+          "source": "教案-备用题解答"
+        },
+        {
+          "pid": "lv101kz06",
+          "title": "求两个变量的和、差、积、商、余数",
+          "role": "backup",
+          "order": 22,
+          "tier": null,
+          "tierLabel": "",
+          "minutes": null,
+          "knowledge": [
+            "求两个变量的",
+            "余数"
+          ],
+          "source": "教案-备用题解答"
+        },
+        {
+          "pid": "lv101kz07",
+          "title": "时间转换",
+          "role": "backup",
+          "order": 23,
+          "tier": null,
+          "tierLabel": "",
+          "minutes": null,
+          "knowledge": [
+            "时间转换"
+          ],
+          "source": "教案-备用题解答"
+        },
+        {
+          "pid": "lv101kz09",
+          "title": "求任意三个整数的平方和",
+          "role": "backup",
+          "order": 24,
+          "tier": null,
+          "tierLabel": "",
+          "minutes": null,
+          "knowledge": [
+            "求任意三个整数的平方和"
+          ],
+          "source": "教案-备用题解答"
+        },
+        {
+          "pid": "P1300",
+          "title": "反向输出",
+          "role": "backup",
+          "order": 25,
+          "tier": null,
+          "tierLabel": "",
+          "minutes": null,
+          "knowledge": [
+            "反向输出"
+          ],
+          "source": "教案-备用题解答"
+        },
+        {
+          "pid": "P1385",
+          "title": "双面打印",
+          "role": "backup",
+          "order": 26,
+          "tier": null,
+          "tierLabel": "",
+          "minutes": null,
+          "knowledge": [
+            "双面打印"
+          ],
+          "source": "教案-备用题解答"
+        }
+      ],
+      "counts": {
+        "formal": 20,
+        "backup": 6,
+        "quiz": 15
+      },
+      "extra": [],
+      "previewCandidates": [
+        "P1623",
+        "P1301",
+        "P1575",
+        "P1576",
+        "P1577",
+        "P1283",
+        "lv103kz02",
+        "P1286",
+        "lv103kz05",
+        "lv10305",
+        "lv10307",
+        "lv10303",
+        "P1043",
+        "lv10308",
+        "P1554",
+        "P1037",
+        "P1128",
+        "lv102kh02",
+        "P1028",
+        "lv10306",
+        "lv102kh01",
+        "P1027",
+        "lv10207",
+        "P1302",
+        "P2673",
+        "lv104kh04",
+        "P1009",
+        "lv104kh01",
+        "lv104kh02",
+        "P1624",
+        "lv104khz05",
+        "lv103kz04",
+        "lv103kz06",
+        "lv103kz13",
+        "lv104kz02",
+        "P1010",
+        "a1",
+        "a2",
+        "lv103kh03",
+        "lv104kh03",
+        "lv103kz07",
+        "P1341",
+        "P1045",
+        "fz00101",
+        "P1136",
+        "lv103kz14",
+        "lv103kh04",
+        "GESP202509D1T1",
+        "lv105kz05",
+        "lv105kz01",
+        "P1044",
+        "lv105kz03",
+        "P1016",
+        "P1012",
+        "lv10701",
+        "P1020",
+        "lv10609",
+        "lv10509",
+        "lv10706",
+        "lv105kh01",
+        "lv105kz10",
+        "P1017",
+        "lv106kh01",
+        "lv106kz01",
+        "lv10704",
+        "lv106kh05",
+        "lv10702",
+        "lv105kh03",
+        "P1013",
+        "P1694",
+        "lv105kh02",
+        "GESP202512D1T2",
+        "lv11001",
+        "lv11006",
+        "lv10604",
+        "lv10506",
+        "lv10707",
+        "fz0032",
+        "lv10508",
+        "P1113",
+        "lv11007",
+        "lv11002",
+        "lv11003",
+        "lv106kz07",
+        "lv10606",
+        "MNS20669",
+        "P1031",
+        "lv105kz11",
+        "lv11009",
+        "fz0035",
+        "P1458",
+        "P1329",
+        "MNS20660",
+        "GESP22",
+        "P2873",
+        "P1321"
+      ]
+    },
+    {
+      "id": "L02",
+      "lesson": 2,
+      "title": "变量、类型、输入与运算",
+      "date": "2026-09-19",
+      "homework": "山东高潜02",
+      "window": {
+        "start": "09:00",
+        "end": "16:30",
+        "lunch": "12:00-13:30"
+      },
+      "totalMinutes": 420,
+      "modules": [
+        {
+          "from": 0,
+          "to": 35,
+          "minutes": 35,
+          "label": "先备诊断不超过8分钟；整数类型、long long与三层范围；其中约3分钟衔接char算术与字符显示"
+        },
+        {
+          "from": 35,
+          "to": 85,
+          "minutes": 50,
+          "label": "前10分钟复查单位、商余和小数显示；后40分钟讲六种比较、门槛词、条件与输出动作的区别"
+        },
+        {
+          "from": 85,
+          "to": 95,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 95,
+          "to": 140,
+          "minutes": 45,
+          "label": "单if、if/else、大括号；默认值与两条分支状态表"
+        },
+        {
+          "from": 140,
+          "to": 150,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 150,
+          "to": 180,
+          "minutes": 30,
+          "label": "独立if与当前值；同一标准比较、暂存最优值；边界测试与验收规则"
+        },
+        {
+          "from": 180,
+          "to": 230,
+          "minutes": 50,
+          "label": "正式题训练一：按主表原序开放，D1为主；检测保留题暂不开题面"
+        },
+        {
+          "from": 230,
+          "to": 240,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 240,
+          "to": 290,
+          "minutes": 50,
+          "label": "正式题训练二：D2前半；未完成者沿原任务继续"
+        },
+        {
+          "from": 290,
+          "to": 300,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 300,
+          "to": 350,
+          "minutes": 50,
+          "label": "正式题训练三：D2后半与D3；有余力者才开备用"
+        },
+        {
+          "from": 350,
+          "to": 360,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 360,
+          "to": 380,
+          "minutes": 20,
+          "label": "15题课末小测"
+        },
+        {
+          "from": 380,
+          "to": 420,
+          "minutes": 40,
+          "label": "大纲4题最低检测、首次结果记录、一次整除边界口述及归档"
+        }
+      ],
+      "acceptance": {
+        "detection": {
+          "count": 4,
+          "minutes": 40,
+          "minFirstPass": 3,
+          "quote": "40分钟4题，至少3题第一次有效提交通过，并能解释一次整除边界"
+        },
+        "quiz": {
+          "count": 15,
+          "pass": 80,
+          "quote": "20分钟，前10题各6分、后5题各8分，总100分，80分及格"
+        },
+        "inClassTarget": 16,
+        "postClassTarget": 20,
+        "quote": "课内争取完成16／20道正式题；课后补齐20题"
+      },
+      "problems": [
+        {
+          "pid": "P1623",
+          "title": "计算乘积",
+          "role": "formal",
+          "order": 1,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "long long 与中间结果范围",
+            "两数乘积"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1301",
+          "title": "你能活多少秒",
+          "role": "formal",
+          "order": 2,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "较大整数计算",
+            "统一时间单位"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1575",
+          "title": "比较大小1",
+          "role": "formal",
+          "order": 3,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "比较结果",
+            "真假用0/1表示"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1576",
+          "title": "比较大小2",
+          "role": "formal",
+          "order": 4,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "单 if",
+            "先设默认结果再按条件更新"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1577",
+          "title": "比较大小3",
+          "role": "formal",
+          "order": 5,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "if/else",
+            "两数择大与相等边界"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1283",
+          "title": "你是天才吗",
+          "role": "formal",
+          "order": 6,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "if/else",
+            "阈值包含等号与固定文本"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz02",
+          "title": "判断是否及格",
+          "role": "formal",
+          "order": 7,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "if/else",
+            "阈值与大小写"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1286",
+          "title": "判断整数奇偶性",
+          "role": "formal",
+          "order": 8,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "余数与判断",
+            "零的奇偶性"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz05",
+          "title": "整数的绝对值",
+          "role": "formal",
+          "order": 9,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "单 if",
+            "正负分类与绝对值"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10305",
+          "title": "判断能否整除",
+          "role": "formal",
+          "order": 10,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "整除判断",
+            "余数为零"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10307",
+          "title": "买练习本",
+          "role": "formal",
+          "order": 11,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "先计算后比较",
+            "总价与钱数的等号边界"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10303",
+          "title": "小美要健康",
+          "role": "formal",
+          "order": 12,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "整除与分支",
+            "固定文本输出"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1043",
+          "title": "条件输出1",
+          "role": "formal",
+          "order": 13,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "分支中计算",
+            "乘法范围与阈值"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10308",
+          "title": "母亲节包礼物",
+          "role": "formal",
+          "order": 14,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "商余与条件",
+            "两个输出要求分开处理"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1554",
+          "title": "时间",
+          "role": "formal",
+          "order": 15,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "单位换算",
+            "分清时分秒的权重"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1037",
+          "title": "装苹果",
+          "role": "formal",
+          "order": 16,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "向上取整",
+            "余数不为零时补一份"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1128",
+          "title": "时间格式",
+          "role": "formal",
+          "order": 17,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "商余拆分",
+            "冒号拼接与不补前导零"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv102kh02",
+          "title": "购买图书",
+          "role": "formal",
+          "order": 18,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "金额合计",
+            "整数分与两位小数输出"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1028",
+          "title": "买铅笔 NOIP2016 普及组 T1",
+          "role": "formal",
+          "order": 19,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 12,
+          "knowledge": [
+            "统一标准后比较方案",
+            "向上取整与独立if维护最小值"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10306",
+          "title": "计算打车费用",
+          "role": "formal",
+          "order": 20,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 12,
+          "knowledge": [
+            "分段计价",
+            "基础费用与超过部分"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv102kh01",
+          "title": "两个整数的和",
+          "role": "backup",
+          "order": 1,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": null,
+          "knowledge": [
+            "long long",
+            "算式格式拼接"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1027",
+          "title": "成绩 NOIP2017 普及组 T1",
+          "role": "backup",
+          "order": 2,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": null,
+          "knowledge": [
+            "整数加权",
+            "先乘后除保持精度"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10207",
+          "title": "X星球信号加密",
+          "role": "backup",
+          "order": 3,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": null,
+          "knowledge": [
+            "字符偏移还原",
+            "已知位移的相反运算"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1302",
+          "title": "计算平均成绩",
+          "role": "backup",
+          "order": 4,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": null,
+          "knowledge": [
+            "平均值",
+            "小数参与除法和固定精度"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        }
+      ],
+      "counts": {
+        "formal": 20,
+        "backup": 4,
+        "quiz": {
+          "items": 15,
+          "minutes": 20,
+          "points": 100,
+          "pass_score": 80
+        }
+      },
+      "extra": [],
+      "previewCandidates": [
+        "P2673",
+        "lv104kh04",
+        "P1009",
+        "lv104kh01",
+        "lv104kh02",
+        "P1624",
+        "lv104khz05",
+        "lv103kz04",
+        "lv103kz06",
+        "lv103kz13",
+        "lv104kz02",
+        "P1010",
+        "a1",
+        "a2",
+        "lv103kh03",
+        "lv104kh03",
+        "lv103kz07",
+        "P1341",
+        "P1045",
+        "fz00101",
+        "P1136",
+        "lv103kz14",
+        "lv103kh04",
+        "GESP202509D1T1",
+        "lv105kz05",
+        "lv105kz01",
+        "P1044",
+        "lv105kz03",
+        "P1016",
+        "P1012",
+        "lv10701",
+        "P1020",
+        "lv10609",
+        "lv10509",
+        "lv10706",
+        "lv105kh01",
+        "lv105kz10",
+        "P1017",
+        "lv106kh01",
+        "lv106kz01",
+        "lv10704",
+        "lv106kh05",
+        "lv10702",
+        "lv105kh03",
+        "P1013",
+        "P1694",
+        "lv105kh02",
+        "GESP202512D1T2",
+        "lv11001",
+        "lv11006",
+        "lv10604",
+        "lv10506",
+        "lv10707",
+        "fz0032",
+        "lv10508",
+        "P1113",
+        "lv11007",
+        "lv11002",
+        "lv11003",
+        "lv106kz07",
+        "lv10606",
+        "MNS20669",
+        "P1031",
+        "lv105kz11",
+        "lv11009",
+        "fz0035",
+        "P1458",
+        "P1329",
+        "MNS20660",
+        "GESP22",
+        "P2873",
+        "P1321"
+      ]
+    },
+    {
+      "id": "L03",
+      "lesson": 3,
+      "title": "比较、逻辑与分支结构",
+      "date": "2026-09-26",
+      "homework": "山东高潜03",
+      "window": {
+        "start": "09:00",
+        "end": "16:30",
+        "lunch": "12:00-13:30"
+      },
+      "totalMinutes": 420,
+      "modules": [
+        {
+          "from": 0,
+          "to": 35,
+          "minutes": 35,
+          "label": "讲授一"
+        },
+        {
+          "from": 35,
+          "to": 85,
+          "minutes": 50,
+          "label": "讲授二"
+        },
+        {
+          "from": 85,
+          "to": 95,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 95,
+          "to": 140,
+          "minutes": 45,
+          "label": "讲授三"
+        },
+        {
+          "from": 140,
+          "to": 150,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 150,
+          "to": 180,
+          "minutes": 30,
+          "label": "讲授四"
+        },
+        {
+          "from": 180,
+          "to": 230,
+          "minutes": 50,
+          "label": "自训一"
+        },
+        {
+          "from": 230,
+          "to": 240,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 240,
+          "to": 290,
+          "minutes": 50,
+          "label": "自训二"
+        },
+        {
+          "from": 290,
+          "to": 300,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 300,
+          "to": 350,
+          "minutes": 50,
+          "label": "自训三"
+        },
+        {
+          "from": 350,
+          "to": 360,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 360,
+          "to": 380,
+          "minutes": 20,
+          "label": "小测"
+        },
+        {
+          "from": 380,
+          "to": 420,
+          "minutes": 40,
+          "label": "提交与验收"
+        }
+      ],
+      "acceptance": {
+        "detection": {
+          "count": 4,
+          "minutes": 45,
+          "minFirstPass": 4,
+          "quote": "大纲最低检测：独立完成4题，教师用边界数据检查分支覆盖"
+        },
+        "quiz": {
+          "count": 15,
+          "pass": 80,
+          "quote": "小测独立评分，80分及格"
+        },
+        "inClassTarget": 16,
+        "postClassTarget": 20,
+        "quote": "课内争取16/20，课后补齐20道正式题"
+      },
+      "problems": [
+        {
+          "pid": "P2673",
+          "title": "正负数判断",
+          "role": "formal",
+          "order": 1,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 4,
+          "knowledge": [
+            "else-if 链",
+            "正负零三类互斥"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv104kh04",
+          "title": "判断是否为两位数",
+          "role": "formal",
+          "order": 2,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 5,
+          "knowledge": [
+            "逻辑与",
+            "闭区间两个端点"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1009",
+          "title": "小哥哥鉴定",
+          "role": "formal",
+          "order": 3,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 5,
+          "knowledge": [
+            "逻辑与",
+            "不同字段同时满足"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv104kh01",
+          "title": "收集瓶盖赢大奖",
+          "role": "formal",
+          "order": 4,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 5,
+          "knowledge": [
+            "逻辑或",
+            "任一条件满足"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv104kh02",
+          "title": "晶晶赴约会",
+          "role": "formal",
+          "order": 5,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 5,
+          "knowledge": [
+            "否定与逻辑或",
+            "排除指定集合"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1624",
+          "title": "数字判断",
+          "role": "formal",
+          "order": 6,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 6,
+          "knowledge": [
+            "字符范围比较",
+            "cin.get单字符含空白读取"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv104khz05",
+          "title": "成绩等级与分数",
+          "role": "formal",
+          "order": 7,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 6,
+          "knowledge": [
+            "字符与多分支",
+            "覆盖其他字符"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz04",
+          "title": "三个数中最大的数",
+          "role": "formal",
+          "order": 8,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 6,
+          "knowledge": [
+            "独立判断更新状态",
+            "初始候选和相等边界"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz06",
+          "title": "分数等级划分",
+          "role": "formal",
+          "order": 9,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 8,
+          "knowledge": [
+            "有序阈值",
+            "从高到低避免覆盖错误"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz13",
+          "title": "判断能否被3、5整除",
+          "role": "formal",
+          "order": 10,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 8,
+          "knowledge": [
+            "组合分类",
+            "同时、仅一个、都不满足"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv104kz02",
+          "title": "是否为一门课不及格",
+          "role": "formal",
+          "order": 11,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 8,
+          "knowledge": [
+            "恰好一个条件",
+            "逻辑组合与四格表"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1010",
+          "title": "看电视",
+          "role": "formal",
+          "order": 12,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "bool组合",
+            "按规则组织且、或"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "a1",
+          "title": "输出天数",
+          "role": "formal",
+          "order": 13,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 12,
+          "knowledge": [
+            "闰年与月份分类",
+            "世纪例外和月份天数"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "a2",
+          "title": "交朋友",
+          "role": "formal",
+          "order": 14,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 14,
+          "knowledge": [
+            "嵌套比较",
+            "距离相等时的第二条件"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kh03",
+          "title": "抽奖程序",
+          "role": "formal",
+          "order": 15,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 9,
+          "knowledge": [
+            "嵌套分支",
+            "先判断获奖区间再分奖品"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv104kh03",
+          "title": "简单计算器",
+          "role": "formal",
+          "order": 16,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 12,
+          "knowledge": [
+            "运算符分类",
+            "整数除法与无效符号"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz07",
+          "title": "骑车与走路",
+          "role": "formal",
+          "order": 17,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 10,
+          "knowledge": [
+            "等价比较",
+            "避免小数比较与三种结果"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1341",
+          "title": "疫苗接种",
+          "role": "formal",
+          "order": 18,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 18,
+          "knowledge": [
+            "日期跨界",
+            "月末和年末的有限进位"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1045",
+          "title": "条件输出",
+          "role": "formal",
+          "order": 19,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 14,
+          "knowledge": [
+            "优先级与复合分支",
+            "短路、条件次序与覆盖"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "fz00101",
+          "title": "吴贤铭的成绩评定",
+          "role": "formal",
+          "order": 20,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 10,
+          "knowledge": [
+            "规则优先级",
+            "全部满足与至少一个满足"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1136",
+          "title": "判断闰年",
+          "role": "backup",
+          "order": 21,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 10,
+          "knowledge": [
+            "逻辑组合",
+            "公历闰年规则"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kz14",
+          "title": "数字星期对应输出",
+          "role": "backup",
+          "order": 22,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 8,
+          "knowledge": [
+            "枚举少量分支",
+            "数字到固定文本"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv103kh04",
+          "title": "荣誉奖章",
+          "role": "backup",
+          "order": 23,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 8,
+          "knowledge": [
+            "独立 if",
+            "多个条件可以同时计数"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "GESP202509D1T1",
+          "title": "[GESP202509 一级] 商店折扣",
+          "role": "backup",
+          "order": 24,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 12,
+          "knowledge": [
+            "两种费用方案比较",
+            "阈值优惠只用一次与整数金额"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        }
+      ],
+      "counts": {
+        "formal": 20,
+        "backup": 4,
+        "quiz": {
+          "items": 15,
+          "minutes": 20,
+          "points": 100,
+          "pass_score": 80
+        }
+      },
+      "extra": [],
+      "previewCandidates": [
+        "lv105kz05",
+        "lv105kz01",
+        "P1044",
+        "lv105kz03",
+        "P1016",
+        "P1012",
+        "lv10701",
+        "P1020",
+        "lv10609",
+        "lv10509",
+        "lv10706",
+        "lv105kh01",
+        "lv105kz10",
+        "P1017",
+        "lv106kh01",
+        "lv106kz01",
+        "lv10704",
+        "lv106kh05",
+        "lv10702",
+        "lv105kh03",
+        "P1013",
+        "P1694",
+        "lv105kh02",
+        "GESP202512D1T2",
+        "lv11001",
+        "lv11006",
+        "lv10604",
+        "lv10506",
+        "lv10707",
+        "fz0032",
+        "lv10508",
+        "P1113",
+        "lv11007",
+        "lv11002",
+        "lv11003",
+        "lv106kz07",
+        "lv10606",
+        "MNS20669",
+        "P1031",
+        "lv105kz11",
+        "lv11009",
+        "fz0035",
+        "P1458",
+        "P1329",
+        "MNS20660",
+        "GESP22",
+        "P2873",
+        "P1321"
+      ]
+    },
+    {
+      "id": "L04",
+      "lesson": 4,
+      "title": "while、for与循环状态",
+      "date": "2026-10-17",
+      "homework": "山东高潜04",
+      "window": {
+        "start": "09:00",
+        "end": "16:30",
+        "lunch": "12:00-13:30"
+      },
+      "totalMinutes": 420,
+      "modules": [
+        {
+          "from": 0,
+          "to": 35,
+          "minutes": 35,
+          "label": "循环三件事；while入口；for顺序；零轮/一轮/端点"
+        },
+        {
+          "from": 35,
+          "to": 85,
+          "minutes": 50,
+          "label": "定长输入；累加、累乘、条件计数、双最值与并列；范围、向上取整与整数计量"
+        },
+        {
+          "from": 85,
+          "to": 95,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 95,
+          "to": 140,
+          "minutes": 45,
+          "label": "哨兵与EOF；固定字段多组输入、逐组输出与复位；break/continue"
+        },
+        {
+          "from": 140,
+          "to": 150,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 150,
+          "to": 180,
+          "minutes": 30,
+          "label": "保存旧状态；有限递推；本组/跨组状态生命周期；首次达标与边界诊断"
+        },
+        {
+          "from": 180,
+          "to": 230,
+          "minutes": 50,
+          "label": "正式题训练一；前45分钟执行大纲4题检测，余5分钟留档"
+        },
+        {
+          "from": 230,
+          "to": 240,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 240,
+          "to": 290,
+          "minutes": 50,
+          "label": "正式题训练二：补齐基础统计，进入D2输入与阈值状态"
+        },
+        {
+          "from": 290,
+          "to": 300,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 300,
+          "to": 350,
+          "minutes": 50,
+          "label": "正式题训练三：D2递推及D3最值并列/增长阈值挑战；按证据分层"
+        },
+        {
+          "from": 350,
+          "to": 360,
+          "minutes": 10,
+          "label": "休息"
+        },
+        {
+          "from": 360,
+          "to": 380,
+          "minutes": 20,
+          "label": "15道单选小测；独立完成"
+        },
+        {
+          "from": 380,
+          "to": 420,
+          "minutes": 40,
+          "label": "提交/补测、手算口述、最低证据核对、错因记录；有余力启动备用"
+        }
+      ],
+      "acceptance": {
+        "detection": {
+          "count": 4,
+          "minutes": 45,
+          "minFirstPass": 3,
+          "quote": "45分钟4题，至少3题一次通过并手推一段循环"
+        },
+        "quiz": {
+          "count": 15,
+          "pass": 80,
+          "quote": "20分钟15道单选，前10题各6分、后5题各8分，共100分，80分及格"
+        },
+        "inClassTarget": 16,
+        "postClassTarget": 20,
+        "quote": "高潜班争取课内4小时训练阶段完成16道正式题，课后补齐20道正式题"
+      },
+      "problems": [
+        {
+          "pid": "lv105kz05",
+          "title": "输出1-N之间所有的奇数",
+          "role": "formal",
+          "order": 1,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 6,
+          "knowledge": [
+            "单层 for",
+            "奇数、端点和分隔符"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kz01",
+          "title": "输出1-N之间所有能被3整除的数",
+          "role": "formal",
+          "order": 2,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "循环中判断",
+            "空结果与分隔符标记"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1044",
+          "title": "阶乘",
+          "role": "formal",
+          "order": 3,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 6,
+          "knowledge": [
+            "累乘",
+            "初值1与循环端点"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kz03",
+          "title": "与指定数字相同的数的个数",
+          "role": "formal",
+          "order": 4,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 7,
+          "knowledge": [
+            "流式计数",
+            "输入次数与条件次数区分"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1016",
+          "title": "计算1到n的和",
+          "role": "formal",
+          "order": 5,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "累加",
+            "long long累计范围"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1012",
+          "title": "输出最大值",
+          "role": "formal",
+          "order": 6,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 9,
+          "knowledge": [
+            "流式最大值",
+            "用第一个值初始化，兼容全负"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10701",
+          "title": "美丽数字",
+          "role": "formal",
+          "order": 7,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 8,
+          "knowledge": [
+            "条件计数",
+            "是9倍数且非8倍数"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1020",
+          "title": "求和计算",
+          "role": "formal",
+          "order": 8,
+          "tier": 1,
+          "tierLabel": "D1",
+          "minutes": 9,
+          "knowledge": [
+            "哨兵循环",
+            "先判结束标记再累加"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10609",
+          "title": "最大跨度值",
+          "role": "formal",
+          "order": 9,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 10,
+          "knowledge": [
+            "流式最大最小值",
+            "差值与首项初始化"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10509",
+          "title": "统计能被5整除的数",
+          "role": "formal",
+          "order": 10,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 10,
+          "knowledge": [
+            "哨兵与条件计数",
+            "结束标记不参加统计"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10706",
+          "title": "等差数列",
+          "role": "formal",
+          "order": 11,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 11,
+          "knowledge": [
+            "状态递推",
+            "当前项与项号分开"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kh01",
+          "title": "累乘问题",
+          "role": "formal",
+          "order": 12,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 12,
+          "knowledge": [
+            "while停止条件",
+            "乘积首次达到阈值"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kz10",
+          "title": "斐波那契数列问题",
+          "role": "formal",
+          "order": 13,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 12,
+          "knowledge": [
+            "双状态递推",
+            "新旧值更新顺序"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1017",
+          "title": "计算1到n的立方和",
+          "role": "formal",
+          "order": 14,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 12,
+          "knowledge": [
+            "累加与整数乘方",
+            "中间量先用long long"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv106kh01",
+          "title": "一尺之棰",
+          "role": "formal",
+          "order": 15,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 10,
+          "knowledge": [
+            "状态减半",
+            "整数除法与轮数"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv106kz01",
+          "title": "计算指定区间中偶数和奇数之和",
+          "role": "formal",
+          "order": 16,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 10,
+          "knowledge": [
+            "双累计器",
+            "区间分类与输出顺序"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10704",
+          "title": "短信计费",
+          "role": "formal",
+          "order": 17,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 14,
+          "knowledge": [
+            "多组计费累加",
+            "整数向上取整与小数输出"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv106kh05",
+          "title": "巧妙求和",
+          "role": "formal",
+          "order": 18,
+          "tier": 2,
+          "tierLabel": "D2",
+          "minutes": 14,
+          "knowledge": [
+            "累加与公式项",
+            "分清当前项与总和"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10702",
+          "title": "不高兴的津津",
+          "role": "formal",
+          "order": 19,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 16,
+          "knowledge": [
+            "最优状态与位置",
+            "并列保留最早一次"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kh03",
+          "title": "青蛙的故事",
+          "role": "formal",
+          "order": 20,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 18,
+          "knowledge": [
+            "循环不变量",
+            "旧状态推出新状态"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1013",
+          "title": "输出正数的和",
+          "role": "backup",
+          "order": 21,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 10,
+          "knowledge": [
+            "条件累加",
+            "long long结果与正数域"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1694",
+          "title": "1！5！",
+          "role": "backup",
+          "order": 22,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 10,
+          "knowledge": [
+            "并行计数器",
+            "三种指定值各自计数"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kh02",
+          "title": "肥宅快乐水",
+          "role": "backup",
+          "order": 23,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 12,
+          "knowledge": [
+            "资源递减模拟",
+            "不足一份时领取剩余量"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "GESP202512D1T2",
+          "title": "[GESP202512 一级] 手机电量显示",
+          "role": "backup",
+          "order": 24,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 12,
+          "knowledge": [
+            "多组输入和互斥分支",
+            "每组单独输出与阈值等号"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        }
+      ],
+      "counts": {
+        "formal": 20,
+        "backup": 4,
+        "quiz": {
+          "items": 15,
+          "minutes": 20,
+          "points": 100,
+          "pass_score": 80
+        }
+      },
+      "extra": [],
+      "previewCandidates": [
+        "lv11001",
+        "lv11006",
+        "lv10604",
+        "lv10506",
+        "lv10707",
+        "fz0032",
+        "lv10508",
+        "P1113",
+        "lv11007",
+        "lv11002",
+        "lv11003",
+        "lv106kz07",
+        "lv10606",
+        "MNS20669",
+        "P1031",
+        "lv105kz11",
+        "lv11009",
+        "fz0035",
+        "P1458",
+        "P1329",
+        "MNS20660",
+        "GESP22",
+        "P2873",
+        "P1321"
+      ]
+    },
+    {
+      "id": "L05",
+      "lesson": 5,
+      "title": "循环嵌套、枚举与数字拆位",
+      "date": "2026-10-24",
+      "homework": "山东高潜05",
+      "window": {
+        "start": "09:00",
+        "end": "16:30",
+        "lunch": "12:00-13:30"
+      },
+      "totalMinutes": 420,
+      "modules": [
+        {
+          "from": 0,
+          "to": 35,
+          "minutes": 35,
+          "label": "教学·循环套循环"
+        },
+        {
+          "from": 35,
+          "to": 85,
+          "minutes": 50,
+          "label": "教学·行列与有限枚举"
+        },
+        {
+          "from": 85,
+          "to": 95,
+          "minutes": 10,
+          "label": "教学·休息"
+        },
+        {
+          "from": 95,
+          "to": 140,
+          "minutes": 45,
+          "label": "教学·数位与重组"
+        },
+        {
+          "from": 140,
+          "to": 150,
+          "minutes": 10,
+          "label": "教学·休息"
+        },
+        {
+          "from": 150,
+          "to": 180,
+          "minutes": 30,
+          "label": "教学·整除关系与验证"
+        },
+        {
+          "from": 180,
+          "to": 230,
+          "minutes": 50,
+          "label": "训练·正式训练一"
+        },
+        {
+          "from": 230,
+          "to": 240,
+          "minutes": 10,
+          "label": "训练·休息"
+        },
+        {
+          "from": 240,
+          "to": 290,
+          "minutes": 50,
+          "label": "训练·正式训练二"
+        },
+        {
+          "from": 290,
+          "to": 300,
+          "minutes": 10,
+          "label": "训练·休息"
+        },
+        {
+          "from": 300,
+          "to": 350,
+          "minutes": 50,
+          "label": "训练·正式训练三"
+        },
+        {
+          "from": 350,
+          "to": 360,
+          "minutes": 10,
+          "label": "训练·休息"
+        },
+        {
+          "from": 360,
+          "to": 380,
+          "minutes": 20,
+          "label": "训练·课末小测"
+        },
+        {
+          "from": 380,
+          "to": 420,
+          "minutes": 40,
+          "label": "训练·验收与反馈"
+        }
+      ],
+      "acceptance": {
+        "detection": {
+          "count": 3,
+          "minutes": null,
+          "minFirstPass": 3,
+          "quote": "最低检测从已冻结正式题中选三道尚未讲过完整解法的代表题，建议正式01、03、04"
+        },
+        "quiz": {
+          "count": 15,
+          "pass": 80,
+          "quote": "小测独立评分，80分及格"
+        },
+        "inClassTarget": 16,
+        "postClassTarget": 20,
+        "quote": "高潜班训练目标：课内尽量完成16道正式题，课后争取20道正式题全部参考AC"
+      },
+      "problems": [
+        {
+          "pid": "lv11001",
+          "title": "输出矩形",
+          "role": "formal",
+          "order": 1,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 8,
+          "knowledge": [
+            "双重循环",
+            "行与列分别负责"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv11006",
+          "title": "输出直角三角形",
+          "role": "formal",
+          "order": 2,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 8,
+          "knowledge": [
+            "内层上限随行变化",
+            "每行结束后换行"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10604",
+          "title": "立方数",
+          "role": "formal",
+          "order": 3,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 7,
+          "knowledge": [
+            "有限枚举",
+            "整数乘方验证候选"
+          ],
+          "quality": "Q1",
+          "implementation": 2,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10506",
+          "title": "数字2出现的次数",
+          "role": "formal",
+          "order": 4,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 7,
+          "knowledge": [
+            "数位拆分",
+            "余数取个位、整除去个位"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10707",
+          "title": "输出位数",
+          "role": "formal",
+          "order": 5,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 6,
+          "knowledge": [
+            "数位计数",
+            "正整数逐位缩短"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "fz0032",
+          "title": "陈肯的因数",
+          "role": "formal",
+          "order": 6,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 8,
+          "knowledge": [
+            "有限枚举因数",
+            "满足整除条件才计数"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10508",
+          "title": "含K个3的数",
+          "role": "formal",
+          "order": 7,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 10,
+          "knowledge": [
+            "数位统计和逻辑与",
+            "两种条件必须同时满足"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1113",
+          "title": "判断是不是好数字",
+          "role": "formal",
+          "order": 8,
+          "tier": 1,
+          "tierLabel": "G1",
+          "minutes": 9,
+          "knowledge": [
+            "数位分类计数",
+            "零和相等边界"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv11007",
+          "title": "九九乘法表",
+          "role": "formal",
+          "order": 9,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "双重枚举",
+            "积与分隔格式"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv11002",
+          "title": "输出空心矩形",
+          "role": "formal",
+          "order": 10,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "行列边界判断",
+            "退化成单行单列"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv11003",
+          "title": "小杨的 X 字矩阵",
+          "role": "formal",
+          "order": 11,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "双重循环中的条件",
+            "对角线与中心交点"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv106kz07",
+          "title": "aabb 类型完全平方数",
+          "role": "formal",
+          "order": 12,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "有界枚举",
+            "拆位比较和平方验证"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv10606",
+          "title": "与7无关的数之和",
+          "role": "formal",
+          "order": 13,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "筛选后累加",
+            "区分尾数与任意位"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 2,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "MNS20669",
+          "title": "[GESP202409 二级1]数位之和",
+          "role": "formal",
+          "order": 14,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "多组数位和",
+            "每组清零与整除判定"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1031",
+          "title": "计数问题 NOIP2013 普及组 T1",
+          "role": "formal",
+          "order": 15,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 12,
+          "knowledge": [
+            "区间循环套数位循环",
+            "临时副本、数字零不补前导"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv105kz11",
+          "title": "数字反转",
+          "role": "formal",
+          "order": 16,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 12,
+          "knowledge": [
+            "数位反转与重组",
+            "符号、尾零和零输入"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "lv11009",
+          "title": "简单的求和问题",
+          "role": "formal",
+          "order": 17,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 10,
+          "knowledge": [
+            "逐项重组与累加",
+            "两种状态各自更新"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "fz0035",
+          "title": "林人熙和陈肯的回文数挑战",
+          "role": "formal",
+          "order": 18,
+          "tier": 2,
+          "tierLabel": "G2",
+          "minutes": 12,
+          "knowledge": [
+            "回文验证",
+            "原数备份与反转比较"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1458",
+          "title": "组成n的数是否都不同",
+          "role": "formal",
+          "order": 19,
+          "tier": 3,
+          "tierLabel": "G3",
+          "minutes": 18,
+          "knowledge": [
+            "数位两两比较",
+            "不用数组的双层检查"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1329",
+          "title": "奶牛乘法",
+          "role": "formal",
+          "order": 20,
+          "tier": 3,
+          "tierLabel": "G3",
+          "minutes": 18,
+          "knowledge": [
+            "双重数位枚举",
+            "内层副本每轮恢复"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "MNS20660",
+          "title": "[GESP202412 二级2]数位和",
+          "role": "backup",
+          "order": 21,
+          "tier": 4,
+          "tierLabel": "D4",
+          "minutes": 12,
+          "knowledge": [
+            "数位和与全局最大值",
+            "单数状态复位和long long输入"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "GESP22",
+          "title": "数字反转求和",
+          "role": "backup",
+          "order": 22,
+          "tier": 3,
+          "tierLabel": "D3",
+          "minutes": 12,
+          "knowledge": [
+            "两段数字反转",
+            "独立副本与末尾零"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P2873",
+          "title": "最大公约数、最小公倍数",
+          "role": "backup",
+          "order": 23,
+          "tier": 4,
+          "tierLabel": "D4",
+          "minutes": 14,
+          "knowledge": [
+            "公因数公倍数的有限枚举",
+            "最大满足与第一个满足"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        },
+        {
+          "pid": "P1321",
+          "title": "箭形图案",
+          "role": "backup",
+          "order": 24,
+          "tier": 4,
+          "tierLabel": "D4",
+          "minutes": 14,
+          "knowledge": [
+            "行级状态与内层输出",
+            "前导空格、星数和镜像"
+          ],
+          "quality": "Q1",
+          "implementation": 3,
+          "thinking": 3,
+          "source": "教案+双评"
+        }
+      ],
+      "counts": {
+        "formal": 20,
+        "backup": 4,
+        "quiz": {
+          "items": 15,
+          "minutes": 20,
+          "points": 100,
+          "pass_score": 80
+        }
+      },
+      "extra": [],
+      "previewCandidates": []
+    }
+  ],
+  "problems": {
+    "a1": {
+      "pid": "a1",
+      "title": "输出天数",
+      "role": "formal",
+      "order": 13,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 12,
+      "knowledge": [
+        "闰年与月份分类",
+        "世纪例外和月份天数"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "a2": {
+      "pid": "a2",
+      "title": "交朋友",
+      "role": "formal",
+      "order": 14,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 14,
+      "knowledge": [
+        "嵌套比较",
+        "距离相等时的第二条件"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "fz00101": {
+      "pid": "fz00101",
+      "title": "吴贤铭的成绩评定",
+      "role": "formal",
+      "order": 20,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 10,
+      "knowledge": [
+        "规则优先级",
+        "全部满足与至少一个满足"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "fz0032": {
+      "pid": "fz0032",
+      "title": "陈肯的因数",
+      "role": "formal",
+      "order": 6,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 8,
+      "knowledge": [
+        "有限枚举因数",
+        "满足整除条件才计数"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "fz0035": {
+      "pid": "fz0035",
+      "title": "林人熙和陈肯的回文数挑战",
+      "role": "formal",
+      "order": 18,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 12,
+      "knowledge": [
+        "回文验证",
+        "原数备份与反转比较"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "GESP202509D1T1": {
+      "pid": "GESP202509D1T1",
+      "title": "[GESP202509 一级] 商店折扣",
+      "role": "backup",
+      "order": 24,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 12,
+      "knowledge": [
+        "两种费用方案比较",
+        "阈值优惠只用一次与整数金额"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "backup"
+      ]
+    },
+    "GESP202512D1T2": {
+      "pid": "GESP202512D1T2",
+      "title": "[GESP202512 一级] 手机电量显示",
+      "role": "backup",
+      "order": 24,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 12,
+      "knowledge": [
+        "多组输入和互斥分支",
+        "每组单独输出与阈值等号"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "backup"
+      ]
+    },
+    "GESP22": {
+      "pid": "GESP22",
+      "title": "数字反转求和",
+      "role": "backup",
+      "order": 22,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 12,
+      "knowledge": [
+        "两段数字反转",
+        "独立副本与末尾零"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv10101": {
+      "pid": "lv10101",
+      "title": "",
+      "role": "formal",
+      "order": 2,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "多行输出",
+        "换行"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10102": {
+      "pid": "lv10102",
+      "title": "",
+      "role": "formal",
+      "order": 3,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "空格与图形输出"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kh02": {
+      "pid": "lv101kh02",
+      "title": "",
+      "role": "formal",
+      "order": 9,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "三数求和"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kh03": {
+      "pid": "lv101kh03",
+      "title": "",
+      "role": "formal",
+      "order": 10,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "临时变量交换"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kh05": {
+      "pid": "lv101kh05",
+      "title": "",
+      "role": "formal",
+      "order": 11,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "固定格式输出"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kz01": {
+      "pid": "lv101kz01",
+      "title": "",
+      "role": "formal",
+      "order": 4,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "行首空格"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kz02": {
+      "pid": "lv101kz02",
+      "title": "",
+      "role": "formal",
+      "order": 5,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "复杂固定图形"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kz03": {
+      "pid": "lv101kz03",
+      "title": "",
+      "role": "formal",
+      "order": 6,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "算术表达式"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kz04": {
+      "pid": "lv101kz04",
+      "title": "",
+      "role": "formal",
+      "order": 7,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "文本与计算拼接"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kz05": {
+      "pid": "lv101kz05",
+      "title": "求一个三位数各个数位上的数字之和",
+      "role": "backup",
+      "order": 21,
+      "tier": null,
+      "tierLabel": "",
+      "minutes": null,
+      "knowledge": [
+        "求一个三位数各个数位上的数字之和"
+      ],
+      "source": "教案-备用题解答",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv101kz06": {
+      "pid": "lv101kz06",
+      "title": "求两个变量的和、差、积、商、余数",
+      "role": "backup",
+      "order": 22,
+      "tier": null,
+      "tierLabel": "",
+      "minutes": null,
+      "knowledge": [
+        "求两个变量的",
+        "余数"
+      ],
+      "source": "教案-备用题解答",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv101kz07": {
+      "pid": "lv101kz07",
+      "title": "时间转换",
+      "role": "backup",
+      "order": 23,
+      "tier": null,
+      "tierLabel": "",
+      "minutes": null,
+      "knowledge": [
+        "时间转换"
+      ],
+      "source": "教案-备用题解答",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv101kz08": {
+      "pid": "lv101kz08",
+      "title": "",
+      "role": "formal",
+      "order": 8,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "三个变量输入输出"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv101kz09": {
+      "pid": "lv101kz09",
+      "title": "求任意三个整数的平方和",
+      "role": "backup",
+      "order": 24,
+      "tier": null,
+      "tierLabel": "",
+      "minutes": null,
+      "knowledge": [
+        "求任意三个整数的平方和"
+      ],
+      "source": "教案-备用题解答",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv10207": {
+      "pid": "lv10207",
+      "title": "X星球信号加密",
+      "role": "backup",
+      "order": 3,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": null,
+      "knowledge": [
+        "字符偏移还原",
+        "已知位移的相反运算"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv102kh01": {
+      "pid": "lv102kh01",
+      "title": "两个整数的和",
+      "role": "backup",
+      "order": 1,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": null,
+      "knowledge": [
+        "long long",
+        "算式格式拼接"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv102kh02": {
+      "pid": "lv102kh02",
+      "title": "购买图书",
+      "role": "formal",
+      "order": 18,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "金额合计",
+        "整数分与两位小数输出"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv102kh03": {
+      "pid": "lv102kh03",
+      "title": "",
+      "role": "formal",
+      "order": 20,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 14,
+      "knowledge": [
+        "相邻字符"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv102kz04": {
+      "pid": "lv102kz04",
+      "title": "",
+      "role": "formal",
+      "order": 15,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "double",
+        "五位小数"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv102kz05": {
+      "pid": "lv102kz05",
+      "title": "",
+      "role": "formal",
+      "order": 16,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "字符编码"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv102kz06": {
+      "pid": "lv102kz06",
+      "title": "",
+      "role": "formal",
+      "order": 17,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "数字字符编码"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv102kz07": {
+      "pid": "lv102kz07",
+      "title": "",
+      "role": "formal",
+      "order": 19,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 14,
+      "knowledge": [
+        "数字字符转数字"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10303": {
+      "pid": "lv10303",
+      "title": "小美要健康",
+      "role": "formal",
+      "order": 12,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "整除与分支",
+        "固定文本输出"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10305": {
+      "pid": "lv10305",
+      "title": "判断能否整除",
+      "role": "formal",
+      "order": 10,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "整除判断",
+        "余数为零"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10306": {
+      "pid": "lv10306",
+      "title": "计算打车费用",
+      "role": "formal",
+      "order": 20,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 12,
+      "knowledge": [
+        "分段计价",
+        "基础费用与超过部分"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10307": {
+      "pid": "lv10307",
+      "title": "买练习本",
+      "role": "formal",
+      "order": 11,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "先计算后比较",
+        "总价与钱数的等号边界"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10308": {
+      "pid": "lv10308",
+      "title": "母亲节包礼物",
+      "role": "formal",
+      "order": 14,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "商余与条件",
+        "两个输出要求分开处理"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kh03": {
+      "pid": "lv103kh03",
+      "title": "抽奖程序",
+      "role": "formal",
+      "order": 15,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "嵌套分支",
+        "先判断获奖区间再分奖品"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kh04": {
+      "pid": "lv103kh04",
+      "title": "荣誉奖章",
+      "role": "backup",
+      "order": 23,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 8,
+      "knowledge": [
+        "独立 if",
+        "多个条件可以同时计数"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv103kz02": {
+      "pid": "lv103kz02",
+      "title": "判断是否及格",
+      "role": "formal",
+      "order": 7,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "if/else",
+        "阈值与大小写"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kz04": {
+      "pid": "lv103kz04",
+      "title": "三个数中最大的数",
+      "role": "formal",
+      "order": 8,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 6,
+      "knowledge": [
+        "独立判断更新状态",
+        "初始候选和相等边界"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kz05": {
+      "pid": "lv103kz05",
+      "title": "整数的绝对值",
+      "role": "formal",
+      "order": 9,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "单 if",
+        "正负分类与绝对值"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kz06": {
+      "pid": "lv103kz06",
+      "title": "分数等级划分",
+      "role": "formal",
+      "order": 9,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 8,
+      "knowledge": [
+        "有序阈值",
+        "从高到低避免覆盖错误"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kz07": {
+      "pid": "lv103kz07",
+      "title": "骑车与走路",
+      "role": "formal",
+      "order": 17,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 10,
+      "knowledge": [
+        "等价比较",
+        "避免小数比较与三种结果"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kz13": {
+      "pid": "lv103kz13",
+      "title": "判断能否被3、5整除",
+      "role": "formal",
+      "order": 10,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 8,
+      "knowledge": [
+        "组合分类",
+        "同时、仅一个、都不满足"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv103kz14": {
+      "pid": "lv103kz14",
+      "title": "数字星期对应输出",
+      "role": "backup",
+      "order": 22,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 8,
+      "knowledge": [
+        "枚举少量分支",
+        "数字到固定文本"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv104kh01": {
+      "pid": "lv104kh01",
+      "title": "收集瓶盖赢大奖",
+      "role": "formal",
+      "order": 4,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 5,
+      "knowledge": [
+        "逻辑或",
+        "任一条件满足"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv104kh02": {
+      "pid": "lv104kh02",
+      "title": "晶晶赴约会",
+      "role": "formal",
+      "order": 5,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 5,
+      "knowledge": [
+        "否定与逻辑或",
+        "排除指定集合"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv104kh03": {
+      "pid": "lv104kh03",
+      "title": "简单计算器",
+      "role": "formal",
+      "order": 16,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 12,
+      "knowledge": [
+        "运算符分类",
+        "整数除法与无效符号"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv104kh04": {
+      "pid": "lv104kh04",
+      "title": "判断是否为两位数",
+      "role": "formal",
+      "order": 2,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 5,
+      "knowledge": [
+        "逻辑与",
+        "闭区间两个端点"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv104khz05": {
+      "pid": "lv104khz05",
+      "title": "成绩等级与分数",
+      "role": "formal",
+      "order": 7,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 6,
+      "knowledge": [
+        "字符与多分支",
+        "覆盖其他字符"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv104kz02": {
+      "pid": "lv104kz02",
+      "title": "是否为一门课不及格",
+      "role": "formal",
+      "order": 11,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 8,
+      "knowledge": [
+        "恰好一个条件",
+        "逻辑组合与四格表"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10506": {
+      "pid": "lv10506",
+      "title": "数字2出现的次数",
+      "role": "formal",
+      "order": 4,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 7,
+      "knowledge": [
+        "数位拆分",
+        "余数取个位、整除去个位"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10508": {
+      "pid": "lv10508",
+      "title": "含K个3的数",
+      "role": "formal",
+      "order": 7,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 10,
+      "knowledge": [
+        "数位统计和逻辑与",
+        "两种条件必须同时满足"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10509": {
+      "pid": "lv10509",
+      "title": "统计能被5整除的数",
+      "role": "formal",
+      "order": 10,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 10,
+      "knowledge": [
+        "哨兵与条件计数",
+        "结束标记不参加统计"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kh01": {
+      "pid": "lv105kh01",
+      "title": "累乘问题",
+      "role": "formal",
+      "order": 12,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 12,
+      "knowledge": [
+        "while停止条件",
+        "乘积首次达到阈值"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kh02": {
+      "pid": "lv105kh02",
+      "title": "肥宅快乐水",
+      "role": "backup",
+      "order": 23,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 12,
+      "knowledge": [
+        "资源递减模拟",
+        "不足一份时领取剩余量"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "backup"
+      ]
+    },
+    "lv105kh03": {
+      "pid": "lv105kh03",
+      "title": "青蛙的故事",
+      "role": "formal",
+      "order": 20,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 18,
+      "knowledge": [
+        "循环不变量",
+        "旧状态推出新状态"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kz01": {
+      "pid": "lv105kz01",
+      "title": "输出1-N之间所有能被3整除的数",
+      "role": "formal",
+      "order": 2,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "循环中判断",
+        "空结果与分隔符标记"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kz03": {
+      "pid": "lv105kz03",
+      "title": "与指定数字相同的数的个数",
+      "role": "formal",
+      "order": 4,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "流式计数",
+        "输入次数与条件次数区分"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kz05": {
+      "pid": "lv105kz05",
+      "title": "输出1-N之间所有的奇数",
+      "role": "formal",
+      "order": 1,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 6,
+      "knowledge": [
+        "单层 for",
+        "奇数、端点和分隔符"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kz10": {
+      "pid": "lv105kz10",
+      "title": "斐波那契数列问题",
+      "role": "formal",
+      "order": 13,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 12,
+      "knowledge": [
+        "双状态递推",
+        "新旧值更新顺序"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv105kz11": {
+      "pid": "lv105kz11",
+      "title": "数字反转",
+      "role": "formal",
+      "order": 16,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 12,
+      "knowledge": [
+        "数位反转与重组",
+        "符号、尾零和零输入"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10604": {
+      "pid": "lv10604",
+      "title": "立方数",
+      "role": "formal",
+      "order": 3,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 7,
+      "knowledge": [
+        "有限枚举",
+        "整数乘方验证候选"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10606": {
+      "pid": "lv10606",
+      "title": "与7无关的数之和",
+      "role": "formal",
+      "order": 13,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "筛选后累加",
+        "区分尾数与任意位"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10609": {
+      "pid": "lv10609",
+      "title": "最大跨度值",
+      "role": "formal",
+      "order": 9,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 10,
+      "knowledge": [
+        "流式最大最小值",
+        "差值与首项初始化"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv106kh01": {
+      "pid": "lv106kh01",
+      "title": "一尺之棰",
+      "role": "formal",
+      "order": 15,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 10,
+      "knowledge": [
+        "状态减半",
+        "整数除法与轮数"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv106kh05": {
+      "pid": "lv106kh05",
+      "title": "巧妙求和",
+      "role": "formal",
+      "order": 18,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 14,
+      "knowledge": [
+        "累加与公式项",
+        "分清当前项与总和"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv106kz01": {
+      "pid": "lv106kz01",
+      "title": "计算指定区间中偶数和奇数之和",
+      "role": "formal",
+      "order": 16,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 10,
+      "knowledge": [
+        "双累计器",
+        "区间分类与输出顺序"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv106kz07": {
+      "pid": "lv106kz07",
+      "title": "aabb 类型完全平方数",
+      "role": "formal",
+      "order": 12,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "有界枚举",
+        "拆位比较和平方验证"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10701": {
+      "pid": "lv10701",
+      "title": "美丽数字",
+      "role": "formal",
+      "order": 7,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "条件计数",
+        "是9倍数且非8倍数"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10702": {
+      "pid": "lv10702",
+      "title": "不高兴的津津",
+      "role": "formal",
+      "order": 19,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 16,
+      "knowledge": [
+        "最优状态与位置",
+        "并列保留最早一次"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10704": {
+      "pid": "lv10704",
+      "title": "短信计费",
+      "role": "formal",
+      "order": 17,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 14,
+      "knowledge": [
+        "多组计费累加",
+        "整数向上取整与小数输出"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10706": {
+      "pid": "lv10706",
+      "title": "等差数列",
+      "role": "formal",
+      "order": 11,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "状态递推",
+        "当前项与项号分开"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv10707": {
+      "pid": "lv10707",
+      "title": "输出位数",
+      "role": "formal",
+      "order": 5,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 6,
+      "knowledge": [
+        "数位计数",
+        "正整数逐位缩短"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv11001": {
+      "pid": "lv11001",
+      "title": "输出矩形",
+      "role": "formal",
+      "order": 1,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 8,
+      "knowledge": [
+        "双重循环",
+        "行与列分别负责"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv11002": {
+      "pid": "lv11002",
+      "title": "输出空心矩形",
+      "role": "formal",
+      "order": 10,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "行列边界判断",
+        "退化成单行单列"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv11003": {
+      "pid": "lv11003",
+      "title": "小杨的 X 字矩阵",
+      "role": "formal",
+      "order": 11,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "双重循环中的条件",
+        "对角线与中心交点"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv11006": {
+      "pid": "lv11006",
+      "title": "输出直角三角形",
+      "role": "formal",
+      "order": 2,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 8,
+      "knowledge": [
+        "内层上限随行变化",
+        "每行结束后换行"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv11007": {
+      "pid": "lv11007",
+      "title": "九九乘法表",
+      "role": "formal",
+      "order": 9,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "双重枚举",
+        "积与分隔格式"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "lv11009": {
+      "pid": "lv11009",
+      "title": "简单的求和问题",
+      "role": "formal",
+      "order": 17,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "逐项重组与累加",
+        "两种状态各自更新"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "MNS20660": {
+      "pid": "MNS20660",
+      "title": "[GESP202412 二级2]数位和",
+      "role": "backup",
+      "order": 21,
+      "tier": 4,
+      "tierLabel": "D4",
+      "minutes": 12,
+      "knowledge": [
+        "数位和与全局最大值",
+        "单数状态复位和long long输入"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "backup"
+      ]
+    },
+    "MNS20669": {
+      "pid": "MNS20669",
+      "title": "[GESP202409 二级1]数位之和",
+      "role": "formal",
+      "order": 14,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 10,
+      "knowledge": [
+        "多组数位和",
+        "每组清零与整除判定"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1000": {
+      "pid": "P1000",
+      "title": "",
+      "role": "formal",
+      "order": 1,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "固定文本输出"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1009": {
+      "pid": "P1009",
+      "title": "小哥哥鉴定",
+      "role": "formal",
+      "order": 3,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 5,
+      "knowledge": [
+        "逻辑与",
+        "不同字段同时满足"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1010": {
+      "pid": "P1010",
+      "title": "看电视",
+      "role": "formal",
+      "order": 12,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "bool组合",
+        "按规则组织且、或"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1012": {
+      "pid": "P1012",
+      "title": "输出最大值",
+      "role": "formal",
+      "order": 6,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 9,
+      "knowledge": [
+        "流式最大值",
+        "用第一个值初始化，兼容全负"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1013": {
+      "pid": "P1013",
+      "title": "输出正数的和",
+      "role": "backup",
+      "order": 21,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 10,
+      "knowledge": [
+        "条件累加",
+        "long long结果与正数域"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1016": {
+      "pid": "P1016",
+      "title": "计算1到n的和",
+      "role": "formal",
+      "order": 5,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 8,
+      "knowledge": [
+        "累加",
+        "long long累计范围"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1017": {
+      "pid": "P1017",
+      "title": "计算1到n的立方和",
+      "role": "formal",
+      "order": 14,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 12,
+      "knowledge": [
+        "累加与整数乘方",
+        "中间量先用long long"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1020": {
+      "pid": "P1020",
+      "title": "求和计算",
+      "role": "formal",
+      "order": 8,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 9,
+      "knowledge": [
+        "哨兵循环",
+        "先判结束标记再累加"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1027": {
+      "pid": "P1027",
+      "title": "成绩 NOIP2017 普及组 T1",
+      "role": "backup",
+      "order": 2,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": null,
+      "knowledge": [
+        "整数加权",
+        "先乘后除保持精度"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1028": {
+      "pid": "P1028",
+      "title": "买铅笔 NOIP2016 普及组 T1",
+      "role": "formal",
+      "order": 19,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 12,
+      "knowledge": [
+        "统一标准后比较方案",
+        "向上取整与独立if维护最小值"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1031": {
+      "pid": "P1031",
+      "title": "计数问题 NOIP2013 普及组 T1",
+      "role": "formal",
+      "order": 15,
+      "tier": 2,
+      "tierLabel": "G2",
+      "minutes": 12,
+      "knowledge": [
+        "区间循环套数位循环",
+        "临时副本、数字零不补前导"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1037": {
+      "pid": "P1037",
+      "title": "装苹果",
+      "role": "formal",
+      "order": 16,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "向上取整",
+        "余数不为零时补一份"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1038": {
+      "pid": "P1038",
+      "title": "",
+      "role": "formal",
+      "order": 13,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "整数除法与取余"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1039": {
+      "pid": "P1039",
+      "title": "",
+      "role": "formal",
+      "order": 14,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "公式与运算顺序"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1041": {
+      "pid": "P1041",
+      "title": "",
+      "role": "formal",
+      "order": 12,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "变量嵌入句式"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1043": {
+      "pid": "P1043",
+      "title": "条件输出1",
+      "role": "formal",
+      "order": 13,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "分支中计算",
+        "乘法范围与阈值"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1044": {
+      "pid": "P1044",
+      "title": "阶乘",
+      "role": "formal",
+      "order": 3,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 6,
+      "knowledge": [
+        "累乘",
+        "初值1与循环端点"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1045": {
+      "pid": "P1045",
+      "title": "条件输出",
+      "role": "formal",
+      "order": 19,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 14,
+      "knowledge": [
+        "优先级与复合分支",
+        "短路、条件次序与覆盖"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1113": {
+      "pid": "P1113",
+      "title": "判断是不是好数字",
+      "role": "formal",
+      "order": 8,
+      "tier": 1,
+      "tierLabel": "G1",
+      "minutes": 9,
+      "knowledge": [
+        "数位分类计数",
+        "零和相等边界"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1128": {
+      "pid": "P1128",
+      "title": "时间格式",
+      "role": "formal",
+      "order": 17,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "商余拆分",
+        "冒号拼接与不补前导零"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1136": {
+      "pid": "P1136",
+      "title": "判断闰年",
+      "role": "backup",
+      "order": 21,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 10,
+      "knowledge": [
+        "逻辑组合",
+        "公历闰年规则"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1283": {
+      "pid": "P1283",
+      "title": "你是天才吗",
+      "role": "formal",
+      "order": 6,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "if/else",
+        "阈值包含等号与固定文本"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1286": {
+      "pid": "P1286",
+      "title": "判断整数奇偶性",
+      "role": "formal",
+      "order": 8,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "余数与判断",
+        "零的奇偶性"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1300": {
+      "pid": "P1300",
+      "title": "反向输出",
+      "role": "backup",
+      "order": 25,
+      "tier": null,
+      "tierLabel": "",
+      "minutes": null,
+      "knowledge": [
+        "反向输出"
+      ],
+      "source": "教案-备用题解答",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1301": {
+      "pid": "P1301",
+      "title": "你能活多少秒",
+      "role": "formal",
+      "order": 2,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "较大整数计算",
+        "统一时间单位"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1302": {
+      "pid": "P1302",
+      "title": "计算平均成绩",
+      "role": "backup",
+      "order": 4,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": null,
+      "knowledge": [
+        "平均值",
+        "小数参与除法和固定精度"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1321": {
+      "pid": "P1321",
+      "title": "箭形图案",
+      "role": "backup",
+      "order": 24,
+      "tier": 4,
+      "tierLabel": "D4",
+      "minutes": 14,
+      "knowledge": [
+        "行级状态与内层输出",
+        "前导空格、星数和镜像"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1329": {
+      "pid": "P1329",
+      "title": "奶牛乘法",
+      "role": "formal",
+      "order": 20,
+      "tier": 3,
+      "tierLabel": "G3",
+      "minutes": 18,
+      "knowledge": [
+        "双重数位枚举",
+        "内层副本每轮恢复"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1341": {
+      "pid": "P1341",
+      "title": "疫苗接种",
+      "role": "formal",
+      "order": 18,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 18,
+      "knowledge": [
+        "日期跨界",
+        "月末和年末的有限进位"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1385": {
+      "pid": "P1385",
+      "title": "双面打印",
+      "role": "backup",
+      "order": 26,
+      "tier": null,
+      "tierLabel": "",
+      "minutes": null,
+      "knowledge": [
+        "双面打印"
+      ],
+      "source": "教案-备用题解答",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P1458": {
+      "pid": "P1458",
+      "title": "组成n的数是否都不同",
+      "role": "formal",
+      "order": 19,
+      "tier": 3,
+      "tierLabel": "G3",
+      "minutes": 18,
+      "knowledge": [
+        "数位两两比较",
+        "不用数组的双层检查"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1554": {
+      "pid": "P1554",
+      "title": "时间",
+      "role": "formal",
+      "order": 15,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 9,
+      "knowledge": [
+        "单位换算",
+        "分清时分秒的权重"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1575": {
+      "pid": "P1575",
+      "title": "比较大小1",
+      "role": "formal",
+      "order": 3,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "比较结果",
+        "真假用0/1表示"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1576": {
+      "pid": "P1576",
+      "title": "比较大小2",
+      "role": "formal",
+      "order": 4,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "单 if",
+        "先设默认结果再按条件更新"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1577": {
+      "pid": "P1577",
+      "title": "比较大小3",
+      "role": "formal",
+      "order": 5,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "if/else",
+        "两数择大与相等边界"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1623": {
+      "pid": "P1623",
+      "title": "计算乘积",
+      "role": "formal",
+      "order": 1,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 7,
+      "knowledge": [
+        "long long 与中间结果范围",
+        "两数乘积"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L02",
+      "lesson": 2,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1624": {
+      "pid": "P1624",
+      "title": "数字判断",
+      "role": "formal",
+      "order": 6,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 6,
+      "knowledge": [
+        "字符范围比较",
+        "cin.get单字符含空白读取"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P1694": {
+      "pid": "P1694",
+      "title": "1！5！",
+      "role": "backup",
+      "order": 22,
+      "tier": 3,
+      "tierLabel": "D3",
+      "minutes": 10,
+      "knowledge": [
+        "并行计数器",
+        "三种指定值各自计数"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L04",
+      "lesson": 4,
+      "roles": [
+        "backup"
+      ]
+    },
+    "P2117": {
+      "pid": "P2117",
+      "title": "",
+      "role": "formal",
+      "order": 18,
+      "tier": 2,
+      "tierLabel": "D2",
+      "minutes": 11,
+      "knowledge": [
+        "数位拆分",
+        "前导零"
+      ],
+      "quality": "",
+      "implementation": null,
+      "thinking": null,
+      "source": "教案",
+      "lessonId": "L01",
+      "lesson": 1,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P2673": {
+      "pid": "P2673",
+      "title": "正负数判断",
+      "role": "formal",
+      "order": 1,
+      "tier": 1,
+      "tierLabel": "D1",
+      "minutes": 4,
+      "knowledge": [
+        "else-if 链",
+        "正负零三类互斥"
+      ],
+      "quality": "Q1",
+      "implementation": 2,
+      "thinking": 2,
+      "source": "教案+双评",
+      "lessonId": "L03",
+      "lesson": 3,
+      "roles": [
+        "formal"
+      ]
+    },
+    "P2873": {
+      "pid": "P2873",
+      "title": "最大公约数、最小公倍数",
+      "role": "backup",
+      "order": 23,
+      "tier": 4,
+      "tierLabel": "D4",
+      "minutes": 14,
+      "knowledge": [
+        "公因数公倍数的有限枚举",
+        "最大满足与第一个满足"
+      ],
+      "quality": "Q1",
+      "implementation": 3,
+      "thinking": 3,
+      "source": "教案+双评",
+      "lessonId": "L05",
+      "lesson": 5,
+      "roles": [
+        "backup"
+      ]
+    }
+  }
+}

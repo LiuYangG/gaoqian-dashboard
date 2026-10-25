@@ -4,6 +4,7 @@ import path from 'node:path';
 const root = process.cwd();
 const dist = path.join(root, 'dist');
 const snapshotFile = path.join(root, 'data', 'snapshot.json');
+const diagnosisFile = path.join(root, 'data', 'diagnosis.json');
 
 await fs.access(snapshotFile);
 const snapshot = JSON.parse(await fs.readFile(snapshotFile, 'utf8'));
@@ -15,6 +16,13 @@ await fs.rm(dist, { recursive: true, force: true });
 await fs.cp(path.join(root, 'public'), dist, { recursive: true });
 
 await fs.writeFile(path.join(dist, 'data.json'), JSON.stringify(snapshot), 'utf8');
+try {
+  const diagnosis = JSON.parse(await fs.readFile(diagnosisFile, 'utf8'));
+  await fs.writeFile(path.join(dist, 'diagnosis.json'), JSON.stringify(diagnosis), 'utf8');
+  console.log(`diagnosis.json included: hash=${diagnosis.hash || 'n/a'}`);
+} catch {
+  console.log('diagnosis.json missing; the diagnosis tab will show an empty state');
+}
 await fs.writeFile(
   path.join(dist, 'state.json'),
   JSON.stringify({

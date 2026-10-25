@@ -1,12 +1,17 @@
 {
   "name": "gaoqian-homework-dashboard",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "MarsOJ 高潜作业完成情况与做题记录可视化看板",
+  "description": "MarsOJ 高潜作业学情看板：课次诊断、一次通过、节奏与知识点证据",
   "scripts": {
     "start": "node server.mjs",
-    "scrape": "node run-scrape.mjs",
-    "build:static": "node scripts/build-static.mjs"
+    "scrape": "node run-scrape.mjs && node scripts/scrape-raw.mjs && node scripts/analyze.mjs",
+    "raw": "node scripts/scrape-raw.mjs",
+    "blueprint": "node scripts/extract-blueprint.mjs",
+    "analyze": "node scripts/analyze.mjs",
+    "build:static": "node scripts/build-static.mjs",
+    "verify": "node scripts/verify.mjs",
+    "test": "node --test tests/analytics.test.mjs"
   }
 }
