@@ -49,18 +49,26 @@ jobs:
           restore-keys: |
             raw-lessons-
 
-      - name: Scrape latest data
+      - name: Restore record-detail cache
+        uses: actions/cache@v4
+        with:
+          path: data/record-cache.json
+          key: record-cache-${{ github.run_id }}
+          restore-keys: |
+            record-cache-
+
+      - name: Scrape latest data (incremental)
         env:
           MARS_USER: ${{ secrets.MARS_USER }}
           MARS_PASS: ${{ secrets.MARS_PASS }}
-          FORCE_SCRAPE: '1'
+          FORCE_SCRAPE: '0'
         run: node run-scrape.mjs
 
-      - name: Fetch full submission stream
+      - name: Fetch full submission stream (incremental)
         env:
           MARS_USER: ${{ secrets.MARS_USER }}
           MARS_PASS: ${{ secrets.MARS_PASS }}
-          RAW_BUDGET_MS: 1500000
+          RAW_BUDGET_MS: 600000
         run: node scripts/scrape-raw.mjs
 
       - name: Build diagnosis

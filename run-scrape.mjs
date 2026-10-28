@@ -1,8 +1,8 @@
 import { scrapeAll } from "./scraper.mjs";
 let last = "";
-// Default: re-fetch the whole current scoreboard so re-judged/duplicated records
-// are overwritten instead of accumulating from an old cache.
-const force = process.env.FORCE_SCRAPE !== "0";
+// Incremental by default: reuse cached record details and only fetch new ones.
+// Set FORCE_SCRAPE=1 for a one-off full refresh.
+const force = process.env.FORCE_SCRAPE === "1";
 const snap = await scrapeAll({
   force,
   onProgress: (p) => {
@@ -10,4 +10,4 @@ const snap = await scrapeAll({
     if (line !== last) { console.log(line); last = line; }
   },
 });
-console.log("DONE", JSON.stringify(snap.stats), force ? "(force)" : "(cached)");
+console.log("DONE", JSON.stringify(snap.stats), force ? "(force)" : "(incremental)");

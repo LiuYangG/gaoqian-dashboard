@@ -361,7 +361,7 @@
       dot.classList.remove('busy');
       text.textContent = state.data ? '数据已就绪' : '等待抓取';
     }
-    $('#syncSub').textContent = generated ? `更新于 ${fmtDateTime(generated)}` : '数据来自 manager.marsoj.cn';
+    $('#syncSub').textContent = generated ? `更新于 ${fmtDateTime(generated)}` : '数据来自 marsoj.cn';
     $('#footerMeta').textContent = generated
       ? `${allHomeworks().length} 次作业 · ${allStudents().filter((s) => !isTeacher(s.uid) && !isInactive(s.uid)).length} 名有效学员 · ${allRecords().length} 条记录 · 更新于 ${fmtDateTime(generated)}`
       : '尚未抓取';
@@ -422,7 +422,7 @@
     return `
       <div class="grid kpi-grid">
         ${kpiCard('▤', '高潜作业', `${g.homeworkCount}<small>次</small>`, `${g.activeCount} 次已产生提交`, '#4f46e5', '#eef0ff')}
-        ${kpiCard('◉', '学员', `${g.studentCount}<small>人</small>`, '有效学员；已排除 1 教师、1 新学员', '#0d9488', '#ccfbf1')}
+        ${kpiCard('◉', '学员', `${g.studentCount}<small>人</small>`, '有效学员；已排除教师与未开始学员', '#0d9488', '#ccfbf1')}
         ${kpiCard('▦', '题目总量', `${g.problemCount}<small>题</small>`, `已提交 ${g.recordCount} 条记录`, '#2563eb', '#dbeafe')}
         ${kpiCard('✓', '通过题次', `${g.ac}<small>次</small>`, `另有 ${g.attempted} 次未通过`, '#059669', '#d1fae5')}
         ${kpiCard('◔', '平均完成率', `${pct(g.completion)}`, `基于 ${g.activeCount} 次已提交作业`, '#d97706', '#fef3c7')}
@@ -971,7 +971,7 @@
       if (e.rid && allRecords().some((r) => r.rid === e.rid)) {
         return `<button class="ev-link" data-record="${esc(e.rid)}" title="${esc(e.at || '')}">${esc(e.pid)} ${esc(e.status || '')}</button>`;
       }
-      return `<a class="ev-link" href="https://marsoj.cn/new/record/${esc(e.rid || '')}" target="_blank" rel="noreferrer" title="${esc(e.at || '')}">${esc(e.pid)} ${esc(e.status || '')} ↗</a>`;
+      return `<a class="ev-link" href="https://marsoj.cn/record/${esc(e.rid || '')}" target="_blank" rel="noreferrer" title="${esc(e.at || '')}">${esc(e.pid)} ${esc(e.status || '')} ↗</a>`;
     }).join('')}</span>`;
   }
 
@@ -1202,7 +1202,10 @@
     }
     const cohort = diagCohort();
     const activeCount = state.diagnosis.stats?.activeStudents ?? cohort.length;
-    if (!state.diagStudent && cohort.length) state.diagStudent = cohort[0].uid;
+    if (!state.diagStudent && cohort.length) {
+      const firstActive = cohort.find((s) => (diagStudents().find((x) => Number(x.uid) === Number(s.uid))?.summary.attempted || 0) > 0);
+      state.diagStudent = (firstActive || cohort[0]).uid;
+    }
     if (!state.diagSession) state.diagSession = diagSessions()[diagSessions().length - 1]?.id || null;
     return `
       <div class="diag-head">
@@ -1508,7 +1511,7 @@
           <tbody>${record.cases.map((c, i) => `<tr><td class="muted num">${i + 1}</td><td><span class="status-chip ${recordTone(c.status?.code)}">${esc(c.status?.code || '—')}</span></td><td class="right num">${esc(c.time || '—')}</td><td class="right num">${esc(c.memory || '—')}</td></tr>`).join('')}</tbody>
         </table></div>` : ''}
       <div style="margin-top:18px;display:flex;gap:9px;flex-wrap:wrap">
-        <a class="btn btn-soft btn-sm" href="https://marsoj.cn/new/record/${esc(record.rid)}" target="_blank" rel="noreferrer">在 MarsOJ 打开 ↗</a>
+        <a class="btn btn-soft btn-sm" href="https://marsoj.cn/record/${esc(record.rid)}" target="_blank" rel="noreferrer">在 MarsOJ 打开 ↗</a>
         <button class="btn btn-soft btn-sm" data-student="${record.user?.uid}">查看该学员 →</button>
       </div>
     `;

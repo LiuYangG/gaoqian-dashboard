@@ -58,7 +58,7 @@ git push -u origin main
 如果 `build` 失败，优先检查：
 
 - [ ] `MARS_USER` / `MARS_PASS` 是否拼写正确
-- [ ] GitHub Actions 是否能访问 `marsoj.cn`、`ms.marsoj.cn`
+- [ ] GitHub Actions 是否能访问 `marsoj.cn`
 - [ ] Actions 日志里是否提示 Pages 未开启
 
 ## 6. 获取公网网址
