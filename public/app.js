@@ -258,7 +258,7 @@
       studentCount: students.length,
       problemCount: hws.reduce((sum, hw) => sum + (hw.problemCount || 0), 0),
       activeProblemCount: problems,
-      recordCount: (state.data?.records || []).length,
+      recordCount: allRecords().length,
       ac,
       attempted,
       none,
@@ -298,7 +298,7 @@
   }
 
   function allRecords() {
-    return state.data?.records || [];
+    return (state.data?.records || []).filter((r) => !isTeacher(r.user?.uid));
   }
 
   function recordTone(code) {
