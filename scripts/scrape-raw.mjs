@@ -26,6 +26,16 @@ const CUTOFF = Date.parse('2026-09-10T00:00:00+08:00');
 const OVERLAP_MS = 10 * 60 * 1000;
 const BUDGET_MS = Number(process.env.RAW_BUDGET_MS || 10 * 60 * 1000);
 const MAX_PAGES = Number(process.env.RAW_MAX_PAGES || 80);
+const NUM_STATUS = { 0: 'PD', 1: 'AC', 2: 'WA', 3: 'TLE', 4: 'MLE', 5: 'OLE', 6: 'RE', 7: 'CE', 8: 'SE', 9: 'CANCELED', 10: 'ETC' };
+function statusCodeOf(record) {
+  // Older checkpoints stored numeric `status`; keep them readable after a merge.
+  let code = record.statusCode;
+  if (typeof code === 'number') code = NUM_STATUS[code];
+  if (!code && record.status && typeof record.status === 'object') code = record.status.code;
+  if (!code && typeof record.status === 'number') code = NUM_STATUS[record.status];
+  if (!code && typeof record.status === 'string') code = record.status;
+  return code || 'UNK';
+}
 
 const snapshot = await readJson(SNAPSHOT);
 const blueprint = await readJson(BLUEPRINT);
@@ -106,8 +116,8 @@ for (const session of plan.sessions) {
         rid: r.rid,
         uid: Number(r.uid),
         uname: r.uname,
-        status: r.status?.code || r.status,
-        statusCode: r.status?.code || r.status,
+        status: statusCodeOf(r),
+        statusCode: statusCodeOf(r),
         score: Number(r.score) || 0,
         judgeAt: r.judgeAt,
       }))
