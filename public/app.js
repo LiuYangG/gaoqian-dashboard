@@ -6,6 +6,7 @@
     diagnosis: null,
     diagStudent: null,
     diagSession: null,
+    svStudent: null,
     diagMethodOpen: false,
     tab: 'overview',
     hwId: 'all',
@@ -325,6 +326,7 @@
     $('#tabHwCount').textContent = allHomeworks().length;
     $('#tabStudentCount').textContent = allStudents().filter((s) => !isTeacher(s.uid)).length;
     $('#tabDiagCount').textContent = state.diagnosis?.cohort?.length || 0;
+    $('#tabSvCount').textContent = state.diagnosis?.cohort?.length || 0;
     $('#tabRecordCount').textContent = allRecords().length;
   }
 
@@ -1071,7 +1073,10 @@
       <section class="panel diag-panel">
         <div class="panel-head">
           <div><h2>学员 · 掌握与学习状态证据</h2><p>结论只基于 OJ 提交与评测时间；点击上方学员和课次按钮切换。</p></div>
-          <div class="student-chips">${chips}</div>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-soft btn-sm" data-sv-student="${student.uid}">学员做题视角 →</button>
+            <div class="student-chips">${chips}</div>
+          </div>
         </div>
         <div class="diag-stat-row">
           ${diagStat('完成率', `${pctRate(student.summary.completionRate)}<small> ${student.summary.ac}/${student.summary.formalTotal}</small>`, `未做 ${student.summary.untried} 题`)}
@@ -1226,6 +1231,251 @@
     `;
   }
 
+  // ---------- Student doing analysis ----------
+  function svStatus(problem) {
+    if (problem.firstPass) return { cls: 'first', label: '首次 AC', short: '✓' };
+    if (problem.eventualAC) return { cls: 'retry', label: '重试后 AC', short: '↻' };
+    if (problem.attempted) return { cls: 'fail', label: '提交未 AC', short: '×' };
+    return { cls: 'none', label: '未提交', short: '·' };
+  }
+
+  function svLessonStats(session) {
+    const problems = session.problems || [];
+    const first = problems.filter((p) => p.firstPass).length;
+    const retry = problems.filter((p) => !p.firstPass && p.eventualAC).length;
+    const fail = problems.filter((p) => p.attempted && !p.eventualAC).length;
+    const none = problems.filter((p) => !p.attempted).length;
+    return {
+      total: problems.length,
+      first,
+      retry,
+      fail,
+      none,
+      ac: first + retry,
+      attempts: problems.reduce((sum, p) => sum + (p.attempts || 0), 0),
+    };
+  }
+
+  const svActiveStudent = () => {
+    const list = diagStudents();
+    return list.find((s) => Number(s.uid) === Number(state.svStudent))
+      || list.find((s) => (s.summary?.attempted || 0) > 0)
+      || list[0] || null;
+  };
+
+  function svStudentChips(student) {
+    return diagCohort().map((s) => {
+      const isActive = Number(s.uid) === Number(student?.uid);
+      return `<button class="student-chip ${isActive ? 'active' : ''}" data-sv-select="${s.uid}">${avatar(s.name)}<span>${esc(s.name)}${isInactive(s.uid) ? '（未开始）' : ''}</span></button>`;
+    }).join('');
+  }
+
+  function svKpis(student) {
+    const s = student.summary || {};
+    const firstTarget = s.formalTotal || 0;
+    return `
+      <div class="diag-stat-row">
+        ${diagStat('完成率', `${pctRate(s.completionRate)}<small> ${s.ac}/${firstTarget}</small>`, `未做 ${s.untried ?? '—'} 题`)}
+        ${diagStat('一次通过率', s.firstPassRate == null ? '—' : `${pctRate(s.firstPassRate)}<small> ${s.firstPass}/${s.firstPassKnown}</small>`, s.firstPassWilson ? `95% 区间 ${pctRate(s.firstPassWilson.low)}–${pctRate(s.firstPassWilson.high)}` : '首次提交即 AC')}
+        ${diagStat('课内 AC', `${s.inClassAC ?? '—'}<small> / ${firstTarget}</small>`, `课后补做 ${s.catchupAttempted ?? 0} 题`)}
+        ${diagStat('平均提交次数', s.avgAttempts ?? '—', `放弃 ${s.giveUps ?? 0} 题 · 节奏 ${s.paceMedianRatio ?? '—'}×`)}
+      </div>`;
+  }
+
+  function svLessonCards(student) {
+    return (student.sessions || []).map((session) => {
+      const stats = svLessonStats(session);
+      const meta = diagSessionMeta(session.sessionId) || {};
+      const tiles = (session.problems || []).map((p) => {
+        const status = svStatus(p);
+        const recordRid = (p.evidence || []).find((e) => e.rid)?.rid;
+        const hasRecord = recordRid && allRecords().some((r) => r.rid === recordRid);
+        const tooltip = `${p.pid} ${p.title} · ${status.label} · 提交 ${p.attempts || 0} 次${p.tierLabel ? ` · ${p.tierLabel}` : ''}${p.minutes ? ` · 建议 ${p.minutes}′` : ''}`;
+        const attrs = hasRecord ? `data-record="${esc(recordRid)}"` : '';
+        return `<button class="sv-tile sv-${status.cls}" ${attrs} title="${esc(tooltip)}">
+          <span class="sv-tile-mark">${status.short}</span>
+          <span class="sv-tile-pid">${esc(p.pid)}</span>
+          <span class="sv-tile-title">${esc(p.title)}</span>
+        </button>`;
+      }).join('');
+      return `<div class="sv-lesson ${stats.attempts ? '' : 'is-empty'}">
+        <div class="sv-lesson-head">
+          <div class="sv-lesson-title"><b>${esc(session.sessionId)}</b><span>${esc(session.date ? session.date.slice(5) : '—')}</span></div>
+          <div class="sv-lesson-sub">${esc(meta.title || '')}</div>
+          <div class="sv-lesson-badges">
+            <span class="badge green">AC ${stats.ac}/${stats.total}</span>
+            <span class="badge amber">一次 ${stats.first}</span>
+            <span class="badge">提交 ${stats.attempts}</span>
+          </div>
+        </div>
+        <div class="sv-tiles">${tiles || '<span class="muted">暂无题目数据</span>'}</div>
+        <div class="sv-lesson-foot">首次 AC ${stats.first} · 重试 AC ${stats.retry} · 未 AC ${stats.fail} · 未提交 ${stats.none}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function svPhaseData(student) {
+    const phaseOrder = ['in-class', 'preview', 'catch-up', 'after-class', 'before-class'];
+    const labels = ['当堂', '课前/超前', '课后补做', '当天课后', '当天课前'];
+    const colors = ['#4f46e5', '#0d9488', '#d97706', '#e11d48', '#94a3b8'];
+    const series = phaseOrder.map((phase, index) => ({
+      name: labels[index],
+      type: 'bar',
+      stack: 'phase',
+      barWidth: 24,
+      itemStyle: { color: colors[index] },
+      data: (student.sessions || []).map((s) => (s.problems || []).filter((p) => p.attempted && p.firstPhase === phase).length),
+    }));
+    return { series };
+  }
+
+  function svKpRows(student) {
+    const map = new Map();
+    for (const session of student.sessions || []) {
+      for (const k of session.kp || []) {
+        if (!map.has(k.tag)) map.set(k.tag, { tag: k.tag, attempted: 0, firstPass: 0, known: 0 });
+        const row = map.get(k.tag);
+        row.attempted += k.attempted || 0;
+        row.firstPass += k.firstPass || 0;
+        row.known += k.firstPassKnown || 0;
+      }
+    }
+    return [...map.values()]
+      .filter((k) => k.known > 0)
+      .map((k) => ({ ...k, rate: k.firstPass / k.known }))
+      .sort((a, b) => b.known - a.known)
+      .slice(0, 10)
+      .reverse();
+  }
+
+  function renderStudentView() {
+    if (!state.diagnosis) {
+      return `<div class="panel empty-diag"><h3>还没有诊断数据</h3><p>请先运行 <code>npm run analyze</code>。</p></div>`;
+    }
+    const student = svActiveStudent();
+    if (!student) return '<div class="panel empty-diag"><h3>暂无学员数据</h3></div>';
+    state.svStudent = student.uid;
+    const keyRows = svKpRows(student);
+    const evaluations = (student.sessions || []).filter((s) => s.evaluation);
+    return `
+      <div class="diag-head">
+        <div>
+          <h2>学员做题分析</h2>
+          <p>当前学员：<b>${esc(student.name)}</b> · 以学员为中心，查看每节课每道题的完成情况、提交过程与薄弱知识点；点击题目可打开原始提交。</p>
+        </div>
+        <div class="student-chips">${svStudentChips(student)}</div>
+      </div>
+      ${svKpis(student)}
+      <div class="chart-grid sv-chart-grid">
+        <div class="chart-card">
+          <div class="chart-title">每课题目完成结构 <span class="muted tiny">（按题单实际题目）</span></div>
+          <div id="svTrend" class="chart sv-chart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">题目状态分布 <span class="muted tiny">（首次 AC / 重试 AC / 未 AC / 未提交）</span></div>
+          <div id="svStatus" class="chart sv-chart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">首次提交时段 <span class="muted tiny">（当堂 / 课前 / 课后）</span></div>
+          <div id="svPhase" class="chart sv-chart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">知识点一次通过率 <span class="muted tiny">（题数不少于 1）</span></div>
+          <div id="svKp" class="chart sv-chart"></div>
+        </div>
+      </div>
+      <section class="panel sv-panel">
+        <div class="panel-head">
+          <div><h2>逐课题目完成情况</h2><p>绿色为首次提交即 AC，黄色为重试后 AC，红色为提交未 AC，灰色为未提交；点击有记录的题可查看代码。</p></div>
+          <div class="sv-legend">
+            <span><i class="sv-dot first"></i>首次 AC</span>
+            <span><i class="sv-dot retry"></i>重试 AC</span>
+            <span><i class="sv-dot fail"></i>未 AC</span>
+            <span><i class="sv-dot none"></i>未提交</span>
+          </div>
+        </div>
+        <div class="sv-lessons">${svLessonCards(student)}</div>
+      </section>
+      <div class="diag-two-col">
+        <section class="panel sv-panel">
+          <div class="chart-title">逐课评价（教师查看）</div>
+          <div class="sv-eval-grid">${evaluations.map((s) => `<div class="sv-eval-card">
+            <div class="sv-eval-head"><b>${esc(s.sessionId)}</b><span>${esc(s.date || '')}</span></div>
+            <p>${esc(s.evaluation)}</p>
+          </div>`).join('') || '<div class="muted">暂无逐课评价</div>'}</div>
+        </section>
+        <section class="panel sv-panel">
+          <div class="chart-title">诊断结论 <span class="muted tiny">（点击证据可查看提交）</span></div>
+          <div class="findings sv-findings">${student.findings.length ? student.findings.map((f) => `
+            <div class="finding ${f.level}">
+              <div class="finding-head"><span class="finding-dot"></span><span class="finding-kind">${esc(DIAG_KIND_LABEL[f.kind] || f.kind)}</span>${confidenceChip(f.confidence)}</div>
+              <p>${esc(f.text)}</p>
+              ${evidenceList(f.evidence)}
+            </div>`).join('') : '<div class="muted" style="padding:16px">暂无诊断结论</div>'}</div>
+        </section>
+      </div>
+      <div class="sv-footnote">统计口径：完成率与时序基于 OJ 提交记录；题目来自 MarsOJ 该次作业的实际题单。未开始学员的所有题目标记为未提交。</div>
+    `;
+  }
+
+  function initSvCharts() {
+    const student = svActiveStudent();
+    if (!student) return;
+    const sessions = student.sessions || [];
+    const labels = sessions.map((s) => s.sessionId);
+    const stats = sessions.map((s) => svLessonStats(s));
+    initChart('svTrend', {
+      grid: { left: 8, right: 12, top: 34, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 } },
+      legend: { top: 0, right: 0, textStyle: baseText(), itemWidth: 10, itemHeight: 10 },
+      xAxis: { type: 'category', data: labels, axisLine: { lineStyle: { color: '#e2e8f0' } }, axisTick: { show: false }, axisLabel: baseText() },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: baseText(), splitLine: { lineStyle: { color: '#f1f5f9' } } },
+      series: [
+        { name: '首次 AC', type: 'bar', stack: 'total', barWidth: 28, itemStyle: { color: '#0d9488' }, data: stats.map((x) => x.first) },
+        { name: '重试 AC', type: 'bar', stack: 'total', itemStyle: { color: '#d97706' }, data: stats.map((x) => x.retry) },
+        { name: '未 AC', type: 'bar', stack: 'total', itemStyle: { color: '#e11d48' }, data: stats.map((x) => x.fail) },
+        { name: '未提交', type: 'bar', stack: 'total', itemStyle: { color: '#cbd5e1' }, data: stats.map((x) => x.none) },
+      ],
+    });
+    const totals = stats.reduce((acc, x) => ({ first: acc.first + x.first, retry: acc.retry + x.retry, fail: acc.fail + x.fail, none: acc.none + x.none }), { first: 0, retry: 0, fail: 0, none: 0 });
+    initChart('svStatus', {
+      tooltip: { trigger: 'item', backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 } },
+      legend: { bottom: 0, textStyle: baseText(), itemWidth: 10, itemHeight: 10 },
+      series: [{
+        type: 'pie', radius: ['46%', '68%'], center: ['50%', '45%'], avoidLabelOverlap: true,
+        itemStyle: { borderColor: '#fff', borderWidth: 2 },
+        label: { show: false },
+        data: [
+          { name: '首次 AC', value: totals.first, itemStyle: { color: '#0d9488' } },
+          { name: '重试 AC', value: totals.retry, itemStyle: { color: '#d97706' } },
+          { name: '未 AC', value: totals.fail, itemStyle: { color: '#e11d48' } },
+          { name: '未提交', value: totals.none, itemStyle: { color: '#cbd5e1' } },
+        ],
+      }],
+    });
+    const phase = svPhaseData(student);
+    initChart('svPhase', {
+      grid: { left: 8, right: 12, top: 34, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 } },
+      legend: { top: 0, right: 0, textStyle: baseText(), itemWidth: 10, itemHeight: 10 },
+      xAxis: { type: 'category', data: labels, axisLine: { lineStyle: { color: '#e2e8f0' } }, axisTick: { show: false }, axisLabel: baseText() },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: baseText(), splitLine: { lineStyle: { color: '#f1f5f9' } } },
+      series: phase.series,
+    });
+    const kp = svKpRows(student);
+    initChart('svKp', {
+      grid: { left: 8, right: 30, top: 10, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 }, formatter: (items) => { const item = items[0]; const row = kp[item.dataIndex]; return `${row.tag}<br/>首次通过 ${row.firstPass}/${row.known}<br/>涉及 ${row.attempted} 题`; } },
+      xAxis: { type: 'value', max: 100, axisLabel: { ...baseText(), formatter: '{value}%' }, splitLine: { lineStyle: { color: '#f1f5f9' } } },
+      yAxis: { type: 'category', data: kp.map((k) => k.tag), axisLine: { show: false }, axisTick: { show: false }, axisLabel: baseText() },
+      series: [{
+        type: 'bar', barWidth: 14, data: kp.map((k) => Math.round(k.rate * 100)),
+        itemStyle: { color: '#4f46e5', borderRadius: [0, 4, 4, 0] },
+        label: { show: true, position: 'right', formatter: (item) => `${item.value}%`, color: '#64748b', fontSize: 10 },
+      }],
+    });
+  }
+
   // ---------- Render root ----------
   function disposeCharts() {
     for (const chart of Object.values(state.charts)) {
@@ -1246,7 +1496,7 @@
     $('#emptyState').classList.add('hidden');
     updateTabs();
     setSync(state.scraping);
-    if (state.tab === 'diagnosis') {
+    if (state.tab === 'diagnosis' || state.tab === 'studentview') {
       $('#filterbar').classList.add('hidden');
     } else {
       $('#filterbar').classList.remove('hidden');
@@ -1258,6 +1508,7 @@
     else if (state.tab === 'homework') html = renderHomework();
     else if (state.tab === 'students') html = renderStudents();
     else if (state.tab === 'diagnosis') html = renderDiagnosis();
+    else if (state.tab === 'studentview') html = renderStudentView();
     else if (state.tab === 'records') html = recordsHtml();
     $('#content').innerHTML = html;
     requestAnimationFrame(afterRender);
@@ -1272,6 +1523,8 @@
     } else if (state.tab === 'diagnosis') {
       initDiagTimeline();
       initDiagScatter();
+    } else if (state.tab === 'studentview') {
+      initSvCharts();
     }
     if (state.tab === 'records') {
       const input = $('#recSearch');
@@ -1810,7 +2063,7 @@
   }
 
   document.addEventListener('click', (event) => {
-    const target = event.target.closest('[data-action],[data-tab],[data-hw],[data-student],[data-record],[data-page],[data-diag-session],[data-diag-student],[data-diag-lesson]');
+    const target = event.target.closest('[data-action],[data-tab],[data-hw],[data-student],[data-record],[data-page],[data-diag-session],[data-diag-student],[data-diag-lesson],[data-sv-student],[data-sv-select]');
     if (!target) return;
 
     if (target.dataset.tab) {
@@ -1832,6 +2085,18 @@
       state.diagSession = target.dataset.diagLesson;
       render();
       setTimeout(() => $('#diagProblems')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+      return;
+    }
+    if (target.dataset.svStudent) {
+      state.svStudent = Number(target.dataset.svStudent);
+      state.tab = 'studentview';
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (target.dataset.svSelect) {
+      state.svStudent = Number(target.dataset.svSelect);
+      render();
       return;
     }
     if (target.dataset.action) {
@@ -1931,7 +2196,7 @@
 
     const params = new URLSearchParams(location.search);
     const tab = params.get('tab');
-    if (['overview', 'homework', 'students', 'diagnosis', 'records'].includes(tab)) state.tab = tab;
+    if (['overview', 'homework', 'students', 'diagnosis', 'studentview', 'records'].includes(tab)) state.tab = tab;
     const hwParam = params.get('hw');
     if (hwParam && findHw(hwParam)) {
       state.hwId = hwParam;
@@ -1949,6 +2214,11 @@
     const diagSessionParam = params.get('session');
     if (diagSessionParam && (state.diagnosis?.sessions || []).some((s) => s.id === diagSessionParam)) {
       state.diagSession = diagSessionParam;
+    }
+    const svParam = params.get('svStudent');
+    if (svParam && (state.diagnosis?.cohort || []).some((s) => Number(s.uid) === Number(svParam))) {
+      state.svStudent = Number(svParam);
+      state.tab = 'studentview';
     }
     const recHwParam = params.get('recHw');
     if (recHwParam && findHw(recHwParam)) state.recHw = recHwParam;
