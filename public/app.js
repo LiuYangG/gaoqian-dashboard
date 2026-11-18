@@ -1553,7 +1553,7 @@
         ${diagStat('提交次数', `${totalSubmissions}<small> 次</small>`, '区间内全部 OJ 提交')}
       </div>
       <section class="panel recent-panel">
-        <div class="chart-title">各学员刷题数量 <span class="muted tiny">（AC / 未 AC 题目数）</span></div>
+        <div class="chart-title">各学员刷题数量 <span class="muted tiny">（蓝线：刷题数量；绿虚线：AC 题数）</span></div>
         <div id="recentChart" class="chart recent-chart"></div>
       </section>
       <div class="recent-grid">
@@ -1591,14 +1591,38 @@
       return;
     }
     initChart('recentChart', {
-      grid: { left: 8, right: 18, top: 28, bottom: 8, containLabel: true },
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 } },
+      grid: { left: 8, right: 24, top: 34, bottom: 8, containLabel: true },
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 },
+        formatter: (items) => {
+          const group = groups[items[0]?.dataIndex ?? 0];
+          if (!group) return '';
+          return `${group.name}<br/>刷题 ${group.count} 道 · AC ${group.acCount} 道<br/>提交 ${group.submissions} 次`;
+        },
+      },
       legend: { top: 0, right: 0, textStyle: baseText(), itemWidth: 10, itemHeight: 10 },
-      xAxis: { type: 'value', minInterval: 1, axisLabel: baseText(), splitLine: { lineStyle: { color: '#f1f5f9' } } },
-      yAxis: { type: 'category', data: groups.map((g) => g.name), inverse: true, axisLine: { show: false }, axisTick: { show: false }, axisLabel: baseText() },
+      xAxis: {
+        type: 'category',
+        data: groups.map((g) => g.name),
+        axisLine: { lineStyle: { color: '#e2e8f0' } },
+        axisTick: { show: false },
+        axisLabel: { ...baseText(), interval: 0 },
+      },
+      yAxis: { type: 'value', minInterval: 1, axisLabel: baseText(), splitLine: { lineStyle: { color: '#f1f5f9' } } },
       series: [
-        { name: 'AC 题', type: 'bar', stack: 'count', barWidth: 14, itemStyle: { color: '#0d9488' }, data: groups.map((g) => g.acCount) },
-        { name: '未 AC', type: 'bar', stack: 'count', itemStyle: { color: '#e2e8f0' }, data: groups.map((g) => g.count - g.acCount) },
+        {
+          name: '刷题数量', type: 'line', smooth: 0.35, symbol: 'circle', symbolSize: 8,
+          lineStyle: { width: 3, color: '#4f46e5' }, itemStyle: { color: '#4f46e5' },
+          areaStyle: { color: 'rgba(79,70,229,.10)' },
+          label: { show: true, position: 'top', color: '#4f46e5', fontSize: 11, fontWeight: 600 },
+          data: groups.map((g) => g.count),
+        },
+        {
+          name: 'AC 题数', type: 'line', smooth: 0.35, symbol: 'circle', symbolSize: 6,
+          lineStyle: { width: 2, type: 'dashed', color: '#0d9488' }, itemStyle: { color: '#0d9488' },
+          data: groups.map((g) => g.acCount),
+        },
       ],
     });
   }
