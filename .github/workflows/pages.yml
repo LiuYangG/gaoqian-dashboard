@@ -45,9 +45,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: data/raw
-          key: raw-lessons-${{ github.run_id }}
+          key: raw-lessons-v2-${{ github.run_id }}
           restore-keys: |
-            raw-lessons-
+            raw-lessons-v2-
 
       - name: Restore record-detail cache
         uses: actions/cache@v4

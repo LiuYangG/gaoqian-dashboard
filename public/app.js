@@ -7,6 +7,7 @@
     diagStudent: null,
     diagSession: null,
     svStudent: null,
+    recentDays: 7,
     diagMethodOpen: false,
     tab: 'overview',
     hwId: 'all',
@@ -327,6 +328,7 @@
     $('#tabStudentCount').textContent = allStudents().filter((s) => !isTeacher(s.uid)).length;
     $('#tabDiagCount').textContent = state.diagnosis?.cohort?.length || 0;
     $('#tabSvCount').textContent = state.diagnosis?.cohort?.length || 0;
+    $('#tabRecentCount').textContent = state.diagnosis?.cohort?.length || 0;
     $('#tabRecordCount').textContent = allRecords().length;
   }
 
@@ -1476,6 +1478,131 @@
     });
   }
 
+  // ---------- Recent practice ----------
+  const RECENT_OPTIONS = [
+    { days: 1, label: '最近 1 天' },
+    { days: 3, label: '最近 3 天' },
+    { days: 5, label: '最近 5 天' },
+    { days: 7, label: '最近 1 周' },
+    { days: 30, label: '最近 1 个月' },
+  ];
+
+  function recentGroups(days) {
+    const byUid = new Map();
+    for (const s of diagCohort()) {
+      byUid.set(Number(s.uid), { uid: Number(s.uid), name: s.name, problems: new Map(), submissions: 0 });
+    }
+    const cutoff = Date.now() - days * 86400000;
+    for (const record of state.diagnosis?.activity || []) {
+      const t = Date.parse(record.judgeAt);
+      if (!Number.isFinite(t) || t < cutoff) continue;
+      const group = byUid.get(Number(record.uid));
+      if (!group) continue;
+      group.submissions++;
+      const key = record.pid;
+      let problem = group.problems.get(key);
+      if (!problem) {
+        problem = { pid: record.pid, title: record.title, homework: record.homework || '', attempts: 0, ac: false, lastStatus: record.status, lastAt: record.judgeAt, rid: record.rid };
+        group.problems.set(key, problem);
+      }
+      problem.attempts++;
+      if (String(record.status).toUpperCase() === 'AC') problem.ac = true;
+      if (String(record.judgeAt) >= String(problem.lastAt)) {
+        problem.lastAt = record.judgeAt;
+        problem.lastStatus = record.status;
+        problem.rid = record.rid;
+        problem.homework = record.homework || problem.homework;
+      }
+    }
+    return [...byUid.values()]
+      .map((group) => {
+        const list = [...group.problems.values()].sort((a, b) => String(b.lastAt).localeCompare(String(a.lastAt)));
+        return { ...group, list, count: list.length, acCount: list.filter((p) => p.ac).length };
+      })
+      .sort((a, b) => b.count - a.count || String(a.name).localeCompare(String(b.name), 'zh-Hans-CN'));
+  }
+
+  function recentStatus(problem) {
+    if (problem.ac) return { text: 'AC', cls: 'green' };
+    if (problem.lastStatus === 'PD') return { text: '评测中', cls: 'amber' };
+    return { text: problem.lastStatus || '未 AC', cls: 'rose' };
+  }
+
+  function renderRecent() {
+    if (!state.diagnosis) {
+      return `<div class="panel empty-diag"><h3>还没有诊断数据</h3><p>请先运行 <code>npm run analyze</code>。</p></div>`;
+    }
+    const days = RECENT_OPTIONS.some((o) => o.days === state.recentDays) ? state.recentDays : 7;
+    const groups = recentGroups(days);
+    const totalProblems = groups.reduce((sum, g) => sum + g.count, 0);
+    const totalSubmissions = groups.reduce((sum, g) => sum + g.submissions, 0);
+    const active = groups.filter((g) => g.count > 0).length;
+    const optionHtml = RECENT_OPTIONS.map((o) => `<button class="recent-filter ${o.days === days ? 'active' : ''}" data-recent-days="${o.days}">${o.label}</button>`).join('');
+    return `
+      <div class="diag-head">
+        <div>
+          <h2>近期刷题</h2>
+          <p>按提交时间统计所选时间段内每人刷过的题目；同一题多次提交合并为一道题，点击可查看原始提交。</p>
+        </div>
+        <div class="recent-filters">${optionHtml}</div>
+      </div>
+      <div class="diag-stat-row">
+        ${diagStat('统计区间', RECENT_OPTIONS.find((o) => o.days === days)?.label || '', '以当前时间向前计算')}
+        ${diagStat('刷题人数', `${active}<small> / ${groups.length} 人</small>`, '区间内至少提交过一题')}
+        ${diagStat('题目数', `${totalProblems}<small> 人次</small>`, '按学员 × 题目去重')}
+        ${diagStat('提交次数', `${totalSubmissions}<small> 次</small>`, '区间内全部 OJ 提交')}
+      </div>
+      <section class="panel recent-panel">
+        <div class="chart-title">各学员刷题数量 <span class="muted tiny">（AC / 未 AC 题目数）</span></div>
+        <div id="recentChart" class="chart recent-chart"></div>
+      </section>
+      <div class="recent-grid">
+        ${groups.map((group) => {
+          const rows = group.list.map((p) => {
+            const status = recentStatus(p);
+            return `<div class="recent-problem">
+              <div class="recent-problem-main">
+                <div class="recent-problem-title"><b>${esc(p.pid)}</b> ${esc(p.title || '')}</div>
+                <div class="recent-problem-sub">${esc(p.homework || '')} · 提交 ${p.attempts} 次 · 最近 ${fmtDateTime(p.lastAt)}</div>
+              </div>
+              <span class="badge ${status.cls}">${esc(status.text)}</span>
+              <a class="recent-link" href="https://marsoj.cn/record/${esc(p.rid || '')}" target="_blank" rel="noreferrer">记录 ↗</a>
+            </div>`;
+          }).join('');
+          return `<section class="panel recent-card">
+            <div class="recent-card-head">
+              <div class="recent-person">${avatar(group.name)}<div><b>${esc(group.name)}</b><span>${group.count ? `最近 ${fmtDateTime(group.list[0].lastAt)}` : '本时段暂无提交'}</span></div></div>
+              <div class="recent-count"><b>${group.count}</b><span>道题 · ${group.submissions} 次提交</span></div>
+            </div>
+            ${group.count ? `<div class="recent-list">${rows}</div>` : '<div class="recent-empty">这段时间没有刷题记录。</div>'}
+          </section>`;
+        }).join('')}
+      </div>
+      <div class="sv-footnote">统计以 OJ 提交时间为准；同一道题在区间内多次提交只计一道题，提交次数单独累计。跨作业重合题按题目 ID 合并。</div>
+    `;
+  }
+
+  function initRecentChart() {
+    if (!state.diagnosis) return;
+    const groups = recentGroups(state.recentDays).filter((g) => g.count > 0);
+    if (!groups.length) {
+      const el = document.getElementById('recentChart');
+      if (el) el.innerHTML = '<div class="muted" style="padding:40px 0;text-align:center">所选时间段内还没有刷题记录</div>';
+      return;
+    }
+    initChart('recentChart', {
+      grid: { left: 8, right: 18, top: 28, bottom: 8, containLabel: true },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, backgroundColor: 'rgba(15,23,42,.92)', borderWidth: 0, textStyle: { color: '#fff', fontSize: 11 } },
+      legend: { top: 0, right: 0, textStyle: baseText(), itemWidth: 10, itemHeight: 10 },
+      xAxis: { type: 'value', minInterval: 1, axisLabel: baseText(), splitLine: { lineStyle: { color: '#f1f5f9' } } },
+      yAxis: { type: 'category', data: groups.map((g) => g.name), inverse: true, axisLine: { show: false }, axisTick: { show: false }, axisLabel: baseText() },
+      series: [
+        { name: 'AC 题', type: 'bar', stack: 'count', barWidth: 14, itemStyle: { color: '#0d9488' }, data: groups.map((g) => g.acCount) },
+        { name: '未 AC', type: 'bar', stack: 'count', itemStyle: { color: '#e2e8f0' }, data: groups.map((g) => g.count - g.acCount) },
+      ],
+    });
+  }
+
   // ---------- Render root ----------
   function disposeCharts() {
     for (const chart of Object.values(state.charts)) {
@@ -1496,7 +1623,7 @@
     $('#emptyState').classList.add('hidden');
     updateTabs();
     setSync(state.scraping);
-    if (state.tab === 'diagnosis' || state.tab === 'studentview') {
+    if (state.tab === 'diagnosis' || state.tab === 'studentview' || state.tab === 'recent') {
       $('#filterbar').classList.add('hidden');
     } else {
       $('#filterbar').classList.remove('hidden');
@@ -1509,6 +1636,7 @@
     else if (state.tab === 'students') html = renderStudents();
     else if (state.tab === 'diagnosis') html = renderDiagnosis();
     else if (state.tab === 'studentview') html = renderStudentView();
+    else if (state.tab === 'recent') html = renderRecent();
     else if (state.tab === 'records') html = recordsHtml();
     $('#content').innerHTML = html;
     requestAnimationFrame(afterRender);
@@ -1525,6 +1653,8 @@
       initDiagScatter();
     } else if (state.tab === 'studentview') {
       initSvCharts();
+    } else if (state.tab === 'recent') {
+      initRecentChart();
     }
     if (state.tab === 'records') {
       const input = $('#recSearch');
@@ -2063,7 +2193,7 @@
   }
 
   document.addEventListener('click', (event) => {
-    const target = event.target.closest('[data-action],[data-tab],[data-hw],[data-student],[data-record],[data-page],[data-diag-session],[data-diag-student],[data-diag-lesson],[data-sv-student],[data-sv-select]');
+    const target = event.target.closest('[data-action],[data-tab],[data-hw],[data-student],[data-record],[data-page],[data-diag-session],[data-diag-student],[data-diag-lesson],[data-sv-student],[data-sv-select],[data-recent-days]');
     if (!target) return;
 
     if (target.dataset.tab) {
@@ -2085,6 +2215,11 @@
       state.diagSession = target.dataset.diagLesson;
       render();
       setTimeout(() => $('#diagProblems')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+      return;
+    }
+    if (target.dataset.recentDays) {
+      state.recentDays = Number(target.dataset.recentDays);
+      render();
       return;
     }
     if (target.dataset.svStudent) {
@@ -2196,7 +2331,7 @@
 
     const params = new URLSearchParams(location.search);
     const tab = params.get('tab');
-    if (['overview', 'homework', 'students', 'diagnosis', 'studentview', 'records'].includes(tab)) state.tab = tab;
+    if (['overview', 'homework', 'students', 'diagnosis', 'studentview', 'recent', 'records'].includes(tab)) state.tab = tab;
     const hwParam = params.get('hw');
     if (hwParam && findHw(hwParam)) {
       state.hwId = hwParam;
@@ -2219,6 +2354,11 @@
     if (svParam && (state.diagnosis?.cohort || []).some((s) => Number(s.uid) === Number(svParam))) {
       state.svStudent = Number(svParam);
       state.tab = 'studentview';
+    }
+    const daysParam = Number(params.get('days'));
+    if ([1, 3, 5, 7, 30].includes(daysParam)) {
+      state.recentDays = daysParam;
+      if (state.tab === 'recent') state.tab = 'recent';
     }
     const recHwParam = params.get('recHw');
     if (recHwParam && findHw(recHwParam)) state.recHw = recHwParam;

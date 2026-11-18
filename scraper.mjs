@@ -55,6 +55,19 @@ const normalizeStatus = (code) => {
   const key = String(code || '').trim().toUpperCase();
   return CODE_MAP[key] || CODE_MAP[stripTags(code)] || { code: key.slice(0, 8) || 'UNK', label: stripTags(code) || '未知', tone: 'warn' };
 };
+// OJ occasionally stores an absurd score (e.g. 20000000000) on an AC record.
+// Scores are percentages here, so clamp to 0..100 and force AC to 100.
+const clampScore = (score, accepted = false) => {
+  if (accepted) return 100;
+  const n = Number(score);
+  return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 0;
+};
+function normalizeRecordScore(record) {
+  if (!record) return record;
+  const code = record.status?.code || record.statusCode || (typeof record.status === 'string' ? record.status : '');
+  const accepted = String(code).toUpperCase() === 'AC';
+  return { ...record, score: clampScore(record.score, accepted) };
+}
 
 /** Parse `/homework/{tid}/scoreboard`: problem columns and student rows with record ids. */
 export function parseScoreboardHtml(html) {
@@ -79,7 +92,7 @@ export function parseScoreboardHtml(html) {
       const rid = (cell.match(/\/record\/([0-9a-f]{24})/) || [])[1] || '';
       const cls = (cell.match(/class="(au-[a-z-]+)"/) || [])[1] || '';
       const text = stripTags(cell).replace(/\s+/g, ' ').trim();
-      const score = Number((text.match(/(\d+)/) || [])[1]) || 0;
+      const score = clampScore(Number((text.match(/(\d+)/) || [])[1]) || 0, cls === 'au-accepted' || /✓/.test(text));
       const time = (text.match(/(\d{1,3}:\d{2})/) || [])[1] || '';
       const accepted = cls === 'au-accepted' || /✓/.test(text);
       cells.push({
@@ -128,7 +141,7 @@ export function parseRecordDetailHtml(html, rid) {
   return {
     rid,
     status,
-    score,
+    score: clampScore(score, status.code === 'AC'),
     totalTime,
     peakTime,
     peakMemory,
@@ -227,6 +240,7 @@ export async function scrapeAll({ onProgress = () => {}, force = false } = {}) {
   const isFirstRun = Object.keys(known).length === 0;
   const now = new Date().toISOString();
   const cache = force ? {} : await readJson(CACHE_FILE, {});
+  for (const rid of Object.keys(cache)) cache[rid] = normalizeRecordScore(cache[rid]);
   const details = [];
   const tasks = [];
 
@@ -241,13 +255,8 @@ export async function scrapeAll({ onProgress = () => {}, force = false } = {}) {
       return { docId: p.docId, pid: ref?.pid || String(p.docId), title: ref?.title || p.title };
     });
     const rows = parsed.rows;
-    const students = rows.map((row) => ({
-      uid: row.uid,
-      name: row.name,
-      rank: row.rank,
-      totalScore: row.totalScore,
-      totalTime: row.totalTime,
-      cells: row.cells.map((cell, index) => ({
+    const students = rows.map((row) => {
+      const cells = row.cells.map((cell, index) => ({
         docId: problems[index]?.docId ?? null,
         pid: problems[index]?.pid ?? '',
         title: problems[index]?.title ?? '',
@@ -257,8 +266,16 @@ export async function scrapeAll({ onProgress = () => {}, force = false } = {}) {
         isSubmit: cell.submitted,
         rid: cell.rid,
         value: cell.value,
-      })),
-    }));
+      }));
+      return {
+        uid: row.uid,
+        name: row.name,
+        rank: row.rank,
+        totalScore: cells.reduce((sum, c) => sum + (Number(c.score) || 0), 0),
+        totalTime: row.totalTime,
+        cells,
+      };
+    });
     for (const student of students) for (const cell of student.cells) if (cell.rid) tasks.push(cell.rid);
     details.push({
       id: hw.id,

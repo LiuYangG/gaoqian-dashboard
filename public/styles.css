@@ -740,3 +740,30 @@ table.matrix tbody tr:hover .sticky-col { background: #fafbff; }
   .sv-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .sv-panel .panel-head { flex-direction: column; }
 }
+
+/* ================= Recent practice ================= */
+.recent-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.recent-filter { border: 1px solid var(--line); background: #fff; color: var(--ink-2); border-radius: 999px; padding: 6px 12px; font-size: 12px; cursor: pointer; transition: .15s; }
+.recent-filter:hover { border-color: var(--indigo); color: var(--indigo); }
+.recent-filter.active { background: var(--indigo); border-color: var(--indigo); color: #fff; box-shadow: 0 4px 12px rgba(79,70,229,.25); }
+.recent-panel { margin-top: 18px; }
+.recent-chart { height: 260px; }
+.recent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+.recent-card { padding: 14px 16px; }
+.recent-card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.recent-person { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.recent-person > div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.recent-person b { font-size: 14px; }
+.recent-person span { font-size: 10.5px; color: var(--muted); }
+.recent-count { text-align: right; flex-shrink: 0; }
+.recent-count b { font-size: 20px; color: var(--indigo); font-variant-numeric: tabular-nums; }
+.recent-count span { display: block; font-size: 10px; color: var(--muted); }
+.recent-list { max-height: 430px; overflow: auto; padding-right: 4px; display: flex; flex-direction: column; gap: 6px; }
+.recent-problem { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border: 1px solid var(--line); border-radius: 9px; background: #fbfcff; }
+.recent-problem-main { flex: 1; min-width: 0; }
+.recent-problem-title { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.recent-problem-title b { font-family: var(--mono); font-weight: 600; color: var(--ink-2); margin-right: 4px; }
+.recent-problem-sub { font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.recent-link { font-size: 10px; color: var(--indigo); text-decoration: none; white-space: nowrap; }
+.recent-empty { padding: 26px 10px; text-align: center; color: var(--muted); font-size: 12px; border: 1px dashed var(--line); border-radius: 10px; }
+@media (max-width: 1100px) { .recent-grid { grid-template-columns: 1fr; } }

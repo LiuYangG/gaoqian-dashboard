@@ -31,7 +31,12 @@ async function loadRaw() {
         const target = byPid.get(p.pid);
         if (!p.pending) target.pending = false;
         const seen = new Set(target.records.map((r) => r.rid));
-        for (const r of p.records || []) if (!seen.has(r.rid)) { seen.add(r.rid); target.records.push(r); }
+        for (const r of p.records || []) {
+          if (!seen.has(r.rid)) {
+            seen.add(r.rid);
+            target.records.push({ ...r, lessonId: lesson.lessonId, homework: lesson.homework || '' });
+          }
+        }
       }
     }
     const problems = [...byPid.values()].map((p) => ({ ...p, records: p.records.sort((a, b) => String(a.judgeAt).localeCompare(String(b.judgeAt))) }));

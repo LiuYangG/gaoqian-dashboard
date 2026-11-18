@@ -82,11 +82,17 @@ for (const session of plan.sessions) {
   if (tid && Date.now() <= deadline) {
     try {
       let first = await client.getRecordListHtml(tid, 1);
-      const maxPage = Math.min(lastRecordPage(first), MAX_PAGES);
+      // The new record list renders only the current page, so page links no
+      // longer reveal the last page. Probe sequentially until an empty page or
+      // the checkpoint is reached.
+      let maxPage = lastRecordPage(first);
+      if (maxPage <= 1) maxPage = MAX_PAGES;
+      maxPage = Math.min(maxPage, MAX_PAGES);
       for (let page = 1; page <= maxPage; page++) {
         const html = page === 1 ? first : await client.getRecordListHtml(tid, page);
         const rows = parseRecordListHtml(html);
         pagesRead++;
+        if (!rows.length) break;
         for (const row of rows) {
           if (!row.judgeAt) continue;
           if (Date.parse(row.judgeAt) < since) continue;
